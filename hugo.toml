@@ -1,0 +1,55 @@
+baseURL = "https://michaelhv.no/"
+defaultContentLanguage = "en"
+languageCode = "en"
+title = "Michael Herland Valen"
+theme = "gokarna"
+enableEmoji = true
+
+# Automatically generate robots.txt
+enableRobotsTXT = true # Disable during development
+
+[menu]
+[[menu.main]]
+identifier = "experience"
+name = "Experience"
+url = "/experience/"
+weight = 1
+
+[[menu.main]]
+identifier = "education"
+name = "Education"
+url = "/education/"
+weight = 2
+
+[[menu.main]]
+identifier = "posts"
+name = "Posts"
+url = "/posts/"
+weight = 3
+
+[[menu.main]]
+identifier = "github"
+url = "https://github.com/OriginalMHV"
+pre = "<span data-feather='github'></span>"
+weight = 4
+
+[[menu.main]]
+identifier = "cv"
+name = "CV"
+url = "/docs/CV-MichaelHerlandValen.pdf"
+pre = "<span data-feather='file-text'></span>"
+
+[params]
+footer = "Michael Herland Valen"
+description = "Backend Developer @Telenor."
+avatarURL = "/images/profilepicture.webp"
+AvatarAltText = "avatar"
+avatarSize = "size-m"
+
+socialIcons = [
+    {name = "linkedin", url = "https://www.linkedin.com/in/michaelhv/"},
+    {name = "stackoverflow", url = "https://stackoverflow.com/users/21449359/michael"},
+    {name = "instagram", url = "https://www.instagram.com/michaelherlandvalen/"},
+    {name = "gmail", url = "mailto:michaelherlandvalen@gmail.com"}
+]
+metaKeywords = ["blog", "hugo", "backend developer", "Telenor", "programming", "web development", "portfolio"]
