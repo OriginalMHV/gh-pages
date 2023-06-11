@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Experience on Michael Herland Valen</title>
-    <link>https://michaelhv.no/experience/</link>
+    <link>http://michaelhv.no/experience/</link>
     <description>Recent content in Experience on Michael Herland Valen</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="https://michaelhv.no/experience/index.xml" rel="self" type="application/rss+xml" />
+    <language>en</language><atom:link href="http://michaelhv.no/experience/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
