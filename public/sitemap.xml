@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://michaelhv.no/categories/</loc>
+    <loc>https://michaelhv.no/categories/</loc>
   </url><url>
-    <loc>http://michaelhv.no/education/</loc>
+    <loc>https://michaelhv.no/education/</loc>
   </url><url>
-    <loc>http://michaelhv.no/experience/</loc>
+    <loc>https://michaelhv.no/experience/</loc>
   </url><url>
-    <loc>http://michaelhv.no/</loc>
+    <loc>https://michaelhv.no/</loc>
   </url><url>
-    <loc>http://michaelhv.no/tags/</loc>
+    <loc>https://michaelhv.no/tags/</loc>
   </url>
 </urlset>
