@@ -11,9 +11,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          submodules: true
-          fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -26,6 +23,6 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # if ACCESS_TOKEN does not work, try with GITHUB_TOKEN
+          github_token: ${{ secrets.GHPAGES_TOKEN }}  # if ACCESS_TOKEN does not work, try with GITHUB_TOKEN
           publish_dir: ./public/
           publish_branch: gh-pages  # we push to the gh-pages branch
