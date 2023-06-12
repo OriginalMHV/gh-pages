@@ -26,4 +26,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # if ACCESS_TOKEN does not work, try with GITHUB_TOKEN
           publish_dir: ./public/
           publish_branch: gh-pages  # we push to the gh-pages branch
-          ssh-key: ${{ secrets.ACCESS_TOKEN }}
