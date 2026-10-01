@@ -1,28 +1,30 @@
-name: github pages
+name: Deploy site
 
 on:
   push:
-    branches:
-      - main  # Set a branch to deploy
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
-          hugo-version: '0.113.0'
-
-      - name: Build
-        run: hugo --minify
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GHPAGES_TOKEN }}  # if ACCESS_TOKEN does not work, try with GITHUB_TOKEN
-          publish_dir: ./public/
-          publish_branch: gh-pages  # we push to the gh-pages branch
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v5
