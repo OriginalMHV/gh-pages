@@ -1,0 +1,996 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Michael Herland Valen · Software engineer</title>
+  <meta name="description" content="Software engineer and proud Haugesunder. I build the tools I need, and I remove the systems nobody needs.">
+  <meta property="og:title" content="Michael Herland Valen">
+  <meta property="og:description" content="Software engineer from Haugesund. I build the tools I need, and I remove the systems nobody needs.">
+  <meta property="og:image" content="https://michaelhv.no/images/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:url" content="https://michaelhv.no/">
+  <meta name="theme-color" content="#FBF6EC" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F1C21" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    document.documentElement.classList.add("js");
+    try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch {}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Person","name":"Michael Herland Valen","jobTitle":"Software Engineer","worksFor":{"@type":"Organization","name":"Telenor"},"homeLocation":"Haugesund, Norway","url":"https://michaelhv.no","sameAs":["https://github.com/OriginalMHV","https://www.linkedin.com/in/michaelhv"]}
+  </script>
+  <style>
+    :root {
+      --bg: #FBF6EC;
+      --surface: #FFFFFF;
+      --ink: #17262B;
+      --muted: #56676C;
+      --line: #E8DFCD;
+      --amber: #D2A267;
+      --amber-dark: #A87A42;
+      --sea: #22697A;
+      --sea-soft: #DDEEEF;
+      --fern: #2E7D4F;
+      --fern-soft: #DDF1E3;
+      --red: #C2453A;
+      --on-sea: #FFFFFF;
+      --page: #FBF6EC;
+      --shadow: 0 1px 0 var(--line), 0 12px 32px -18px rgba(23, 38, 43, .35);
+      --display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+      --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      --ease: cubic-bezier(.2, .8, .2, 1);
+      color-scheme: light;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0F1C21; --surface: #16272D; --ink: #F1EBDD; --muted: #9FB0B3; --line: #26393F;
+      --amber: #D9AD72; --amber-dark: #C8955A; --sea: #7CC4CF; --sea-soft: #173439;
+      --fern: #8FD3A6; --fern-soft: #183A28; --red: #F07C6E; --on-sea: #0F1C21; --page: #0F1C21;
+      --shadow: 0 1px 0 var(--line), 0 12px 32px -18px rgba(0, 0, 0, .6);
+      color-scheme: dark;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0F1C21; --surface: #16272D; --ink: #F1EBDD; --muted: #9FB0B3; --line: #26393F;
+        --amber: #D9AD72; --amber-dark: #C8955A; --sea: #7CC4CF; --sea-soft: #173439;
+        --fern: #8FD3A6; --fern-soft: #183A28; --red: #F07C6E; --on-sea: #0F1C21; --page: #0F1C21;
+        --shadow: 0 1px 0 var(--line), 0 12px 32px -18px rgba(0, 0, 0, .6);
+        color-scheme: dark;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 18px/1.6 var(--display);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color .3s, color .3s;
+    }
+    a { color: inherit; text-decoration-color: color-mix(in srgb, var(--sea) 60%, transparent); }
+    ::selection { background: color-mix(in srgb, var(--amber) 40%, transparent); }
+    :focus-visible { outline: 3px solid var(--sea); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+    .mono { font-family: var(--mono); font-size: .8rem; letter-spacing: .02em; }
+    .muted { color: var(--muted); }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    kbd { font: 600 .75rem var(--mono); padding: 1px 6px; border-radius: 6px; border: 1px solid currentColor; }
+
+    section { padding: 104px 0; }
+    h1, h2, h3 { line-height: 1.1; margin: 0; letter-spacing: -.02em; }
+    h2 { font-size: clamp(2rem, 4.5vw, 2.8rem); font-weight: 800; }
+    h3 { font-size: 1.35rem; font-weight: 800; }
+    .lede { font-size: 1.15rem; color: var(--muted); max-width: 42ch; margin: 12px 0 44px; }
+
+    .js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0s); }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 20px; border-radius: 999px;
+      font: 600 1rem var(--display); text-decoration: none; cursor: pointer;
+      border: 2px solid var(--sea); background: var(--sea); color: var(--on-sea);
+      transition: transform .15s ease, border-color .2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn.ghost { background: transparent; color: var(--ink); border-color: color-mix(in srgb, var(--ink) 30%, transparent); }
+    .btn.ghost:hover { border-color: var(--ink); }
+
+    /* Nav */
+    .top {
+      position: sticky; top: 0; z-index: 40;
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent; transition: border-color .3s;
+    }
+    .top.scrolled { border-color: var(--line); }
+    .nav-in { display: flex; align-items: center; gap: 24px; height: 64px; }
+    .top a { text-decoration: none; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: .95rem; margin-right: auto; }
+    .mark { width: 30px; height: 30px; border-radius: 9px; background: linear-gradient(135deg, var(--sea), var(--fern)); color: var(--on-sea); display: grid; place-items: center; font: 800 .95rem var(--display); }
+    .top .links { display: flex; gap: 20px; }
+    .top .links a { color: var(--muted); transition: color .2s; }
+    .top .links a:hover, .top .links a.active { color: var(--ink); }
+    .top .links a.active { text-decoration: underline 2px var(--sea); text-underline-offset: 8px; }
+    .nav-actions { display: flex; gap: 8px; }
+    .icon-btn, .kbar {
+      all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px;
+      border: 1px solid var(--line); border-radius: 10px; font: .8rem var(--mono); color: var(--muted);
+      background: var(--surface); transition: border-color .2s, color .2s;
+    }
+    .icon-btn:hover, .kbar:hover { border-color: var(--ink); color: var(--ink); }
+    .icon-btn:focus-visible, .kbar:focus-visible { outline: 3px solid var(--sea); outline-offset: 2px; }
+    .kbar kbd { border-color: var(--line); font-size: .7rem; }
+
+    /* Hero */
+    .hero { padding: 40px 0 96px; position: relative; isolation: isolate; overflow: hidden; }
+    .hero::before {
+      content: ""; position: absolute; z-index: -1; top: -180px; right: -160px; width: 760px; height: 760px; pointer-events: none;
+      background:
+        radial-gradient(circle 300px at 55% 45%, color-mix(in srgb, var(--sea) 26%, transparent), transparent 100%),
+        radial-gradient(circle 240px at 35% 66%, color-mix(in srgb, var(--amber) 30%, transparent), transparent 100%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 40px; align-items: center; }
+    .hero h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); font-weight: 800; }
+    .spud { position: relative; white-space: nowrap; color: var(--amber-dark); }
+    .scribble { position: absolute; left: -2%; bottom: -.16em; width: 104%; height: .34em; overflow: visible; }
+    .scribble path { fill: none; stroke: var(--amber); stroke-width: 5; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.1s .6s var(--ease) forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    .hero p.intro { font-size: 1.2rem; color: var(--muted); max-width: 34ch; margin: 28px 0 32px; }
+    .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .stage { position: relative; height: 470px; perspective: 1100px; }
+    .stage::before {
+      content: ""; position: absolute; left: 50%; top: 50%; width: 270px; height: 330px; margin: -150px 0 0 -112px;
+      border-radius: 30px; background: linear-gradient(160deg, var(--sea), color-mix(in srgb, var(--sea) 55%, #8FD3DD)); transform: rotate(7deg);
+    }
+    .portrait {
+      position: absolute; left: 50%; top: 50%; width: 270px; height: 330px; margin: -165px 0 0 -135px;
+      border-radius: 30px; overflow: hidden; background: var(--surface);
+      box-shadow: 0 0 0 6px var(--surface), 0 40px 60px -30px rgba(0, 0, 0, .55);
+      transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) rotate(-2deg);
+      transition: transform .3s ease-out;
+    }
+    .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .float {
+      position: absolute; z-index: 2; display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line);
+      box-shadow: var(--shadow); font-weight: 600; font-size: .9rem; white-space: nowrap;
+      translate: var(--fx, 0px) var(--fy, 0px); transition: translate .3s ease-out;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    .float .mono { font-size: .72rem; color: var(--muted); font-weight: 400; }
+    .f1 { top: 28px; left: 0; }
+    .f2 { top: 272px; right: -20px; animation-delay: -2s; }
+    .f3 { bottom: 34px; left: 22px; animation-delay: -4s; }
+    a.float { color: inherit; text-decoration: none; }
+    a.float:hover { border-color: var(--red); }
+    .minus-badge { width: 20px; height: 20px; border-radius: 6px; display: grid; place-items: center; font: 700 .85rem var(--mono); color: var(--red); background: color-mix(in srgb, var(--red) 15%, transparent); }
+    @keyframes floaty { 50% { transform: translateY(-8px); } }
+
+    /* Built */
+    .card {
+      background: var(--surface); border: 1px solid var(--line); border-radius: 28px;
+      padding: 32px; box-shadow: var(--shadow); position: relative;
+    }
+    .card p { margin: 0; color: var(--muted); }
+    .top-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .pill { font-family: var(--mono); font-size: .72rem; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+    .pill.fern { background: var(--fern-soft); color: var(--fern); }
+    .pill.ocean { background: var(--sea-soft); color: var(--sea); }
+    .tags { font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+
+    .fernly { display: grid; grid-template-columns: 1fr 1.05fr; gap: 32px; align-items: center; border-top: 6px solid var(--fern); overflow: hidden; background: linear-gradient(135deg, var(--fern-soft), var(--surface) 62%); }
+    .fernly-text { display: flex; flex-direction: column; gap: 16px; }
+    .fernly h3 { font-size: 2rem; }
+    .nott-row { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+    .nott-row img { width: 86px; height: auto; transition: transform .3s var(--ease); }
+    .nott-row:hover img { transform: translateY(-6px) rotate(-4deg); }
+    .nott-row .say {
+      background: var(--fern-soft); color: var(--fern); font-weight: 600; font-size: .95rem; line-height: 1.35;
+      padding: 10px 14px; border-radius: 16px 16px 16px 4px;
+    }
+    .phones { --pw: 168px; --s: 36px; position: relative; height: calc(var(--pw) * 2.09 + 36px); }
+    .fernly.in .phones { --s: 120px; }
+    .fernly:hover .phones { --s: 142px; }
+    .ph {
+      position: absolute; left: 50%; bottom: 8px; width: var(--pw); height: auto; margin-left: calc(var(--pw) / -2);
+      border-radius: 13% / 6.2%; box-shadow: 0 24px 40px -20px rgba(0, 0, 0, .55);
+      transition: transform .9s var(--ease);
+    }
+    .ph-l { transform: translateX(calc(var(--s) * -1)) translateY(16px) rotate(-9deg); }
+    .ph-r { transform: translateX(var(--s)) translateY(16px) rotate(9deg); }
+    .ph-c { z-index: 2; transform: translateY(-6px); }
+    .fernly:hover .ph-c { transform: translateY(-16px); }
+
+    .row2 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; margin-top: 20px; }
+    .ward { border-top: 6px solid var(--sea); display: flex; flex-direction: column; gap: 16px; background: linear-gradient(135deg, var(--sea-soft), var(--surface) 62%); }
+    .ward a.more { font-weight: 600; text-underline-offset: 4px; }
+    .term { background: #0E1A1E; border-radius: 16px; overflow: hidden; border: 1px solid #22353B; }
+    .term-bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: #15262B; }
+    .term-bar i { width: 11px; height: 11px; border-radius: 50%; background: #F26B5B; }
+    .term-bar i:nth-child(2) { background: #F5BE4F; }
+    .term-bar i:nth-child(3) { background: #5FC27E; }
+    .term-bar span { margin-left: 8px; font: .72rem var(--mono); color: #7E9396; }
+    .term pre { margin: 0; padding: 16px; min-height: 150px; font: .82rem/1.75 var(--mono); color: #E8F1EE; white-space: pre-wrap; word-break: break-word; }
+    .term .ps { color: #8FD3A6; }
+    .term .c { color: #7E9396; }
+    .cursor { display: inline-block; width: .6em; height: 1.1em; vertical-align: -.2em; background: #E8F1EE; animation: caret 1s steps(1) infinite; }
+    @keyframes caret { 50% { opacity: 0; } }
+    .minis { display: grid; gap: 20px; align-content: start; }
+    .mini { border: 2px dashed color-mix(in srgb, var(--amber) 45%, var(--line)); background: color-mix(in srgb, var(--amber) 8%, transparent); border-radius: 22px; padding: 20px 22px; transition: border-color .2s, transform .2s var(--ease); }
+    .mini:hover { border-color: var(--sea); transform: translateY(-3px); }
+    .mini p { margin: 6px 0 0; color: var(--muted); font-size: 1rem; }
+    .mini h3 { font-size: 1.15rem; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+    /* Smaller */
+    .smaller {
+      --bg: #0E3A44; --surface: #154854; --ink: #F4EFE4; --muted: #A9C6CA; --line: #2A606B;
+      --amber-dark: #EDBE7E; --red: #FF9C8C; --fern: #9BE0B3; --sea: #8FD3DD;
+      color: var(--ink); position: relative; padding: 136px 0;
+      background:
+        radial-gradient(640px 400px at 82% 22%, #17606E, transparent 70%),
+        radial-gradient(520px 340px at 10% 74%, #134638, transparent 70%),
+        var(--bg);
+    }
+    .band-wave { position: absolute; left: 0; width: 100%; height: 56px; pointer-events: none; }
+    .band-wave path { fill: var(--page); }
+    .band-wave.top { top: -1px; }
+    .band-wave.bottom { bottom: -1px; transform: scale(-1, -1); }
+    .smaller-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+    .list { display: grid; gap: 30px; }
+    .item { display: grid; grid-template-columns: auto 1fr; gap: 16px; }
+    .item .icon {
+      font-family: var(--mono); font-weight: 600; color: var(--c);
+      width: 42px; height: 42px; border-radius: 12px; background: color-mix(in srgb, var(--c) 16%, transparent);
+      display: grid; place-items: center; border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+    }
+    .item h3 { font-size: 1.15rem; margin-bottom: 6px; }
+    .item p { margin: 0; color: var(--muted); font-size: 1rem; }
+    .stack { margin: 40px 0 0; display: grid; gap: 10px; }
+    .stack p { margin: 0; display: grid; grid-template-columns: 12ch 1fr; gap: 12px; align-items: start; }
+    .stack .mono { color: var(--muted); font-size: .72rem; padding-top: 6px; }
+    .techs { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tech { padding: 4px 11px; border-radius: 999px; font-size: .88rem; font-weight: 600; color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); border: 1px solid color-mix(in srgb, var(--c) 35%, transparent); }
+
+    .pile { position: sticky; top: 96px; background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 22px 22px 18px; }
+    .pile-head { display: flex; justify-content: space-between; color: var(--muted); margin-bottom: 10px; }
+    .chips { position: relative; min-height: 250px; }
+    .chip {
+      display: inline-block; margin: 6px 4px; padding: 8px 12px;
+      font: .8rem var(--mono); background: color-mix(in srgb, var(--ink) 9%, var(--surface)); border: 1px solid var(--line); border-radius: 10px;
+      transform: rotate(var(--r)); box-shadow: 0 6px 14px -10px rgba(0, 0, 0, .4);
+      transition: color .15s, opacity .45s .3s, transform .65s .3s cubic-bezier(.55, 0, .8, .2);
+    }
+    .chip.gone { color: var(--red); text-decoration: line-through; opacity: 0; transform: translateY(90px) rotate(calc(var(--r) * 5)); }
+    .pile-done { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; font-weight: 800; font-size: 1.4rem; opacity: 0; transform: scale(.9); transition: opacity .5s, transform .5s var(--ease); pointer-events: none; }
+    .pile.clean .pile-done { opacity: 1; transform: none; }
+    .pile-done small { display: block; font: .8rem var(--mono); color: var(--muted); margin-top: 6px; }
+    .diff {
+      margin-top: 14px; font-family: var(--mono); font-size: .85rem;
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+      padding: 12px 16px; border-radius: 14px; background: var(--bg); border: 1px solid var(--line);
+    }
+    .diff .add { color: var(--fern); }
+    .diff .del { color: var(--red); font-weight: 600; min-width: 6ch; }
+
+    /* People */
+    .people-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
+    .people-grid p { margin: 0 0 18px; }
+    .pull {
+      margin: 64px 0 0; padding: 0;
+      font-size: clamp(1.6rem, 3.6vw, 2.4rem); font-weight: 800; line-height: 1.2; letter-spacing: -.02em; max-width: 26ch;
+    }
+    .pull::before { content: "\201C"; display: block; font-size: 4.5rem; line-height: .7; color: var(--sea); margin-bottom: 4px; }
+
+    /* Route */
+    .route { border-top: 1px solid var(--line); }
+    .route-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+    .map-wrap { position: sticky; top: 96px; background: var(--sea-soft); border-radius: 28px; overflow: hidden; border: 1px solid color-mix(in srgb, var(--sea) 25%, transparent); }
+    .map { width: 100%; height: auto; display: block; overflow: hidden; }
+    .map .se { fill: var(--bg); opacity: .6; }
+    .map .no { fill: var(--bg); stroke: var(--sea); stroke-width: .7; stroke-opacity: .5; stroke-linejoin: round; }
+    .map .base { fill: none; stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 3 4; opacity: .5; }
+    .map .leg { fill: none; stroke: var(--amber-dark); stroke-width: 3.2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .stop .pin { fill: var(--bg); stroke: var(--muted); stroke-width: 2; transition: fill .3s, stroke .3s; }
+    .stop .halo { fill: var(--amber); opacity: 0; transform-box: fill-box; transform-origin: center; }
+    .stop text { font: 600 10px var(--mono); fill: var(--muted); transition: fill .3s; paint-order: stroke; stroke: var(--bg); stroke-width: 3px; }
+    .stop.on .pin { fill: var(--amber-dark); stroke: var(--amber-dark); }
+    .stop.on text { fill: var(--ink); }
+    .stop.on .halo { animation: halo 2.2s ease-out infinite; }
+    @keyframes halo { 0% { opacity: .5; transform: scale(.6); } 100% { opacity: 0; transform: scale(2.2); } }
+    .legs { list-style: none; margin: 0; padding: 0; }
+    .legs > li { padding: 0 0 18vh; opacity: .35; transition: opacity .5s; }
+    .legs > li:last-child { padding-bottom: 0; }
+    .legs > li.on { opacity: 1; }
+    .legs .where { font: .75rem var(--mono); color: var(--amber-dark); margin: 0 0 6px; }
+    .legs h3 { font-size: 1.6rem; margin-bottom: 14px; }
+    .legs ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .legs ul li { display: grid; grid-template-columns: 5.5ch 1fr; gap: 12px; color: var(--muted); font-size: 1rem; }
+    .legs ul li .yr { font: .75rem var(--mono); padding-top: 4px; color: var(--sea); }
+    .legs ul li b { color: var(--ink); font-weight: 600; }
+
+    /* Haugesund */
+    .harbour { background: var(--sea-soft); position: relative; padding: 128px 0 0; }
+    .waves-top { position: absolute; top: -1px; left: 0; width: 100%; height: 70px; }
+    .waves-top path { fill: var(--bg); }
+    .harbour-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .harbour p.big { font-size: 1.2rem; max-width: 40ch; }
+    .herring-btn {
+      all: unset; cursor: pointer; margin-top: 8px; display: inline-flex; gap: 8px; align-items: center;
+      font: .8rem var(--mono); color: var(--sea); padding: 8px 14px; border-radius: 999px; border: 1.5px dashed var(--sea);
+    }
+    .herring-btn:hover { background: var(--bg); }
+    .herring-btn:focus-visible { outline: 3px solid var(--sea); outline-offset: 3px; }
+    .side { display: grid; gap: 18px; }
+    .weather, .brief { background: var(--bg); border: 1px solid var(--line); border-radius: 22px; padding: 18px 22px; }
+    .weather .mono, .brief .mono { margin: 0 0 8px; color: var(--muted); font-size: .75rem; }
+    .wx-main { display: flex; align-items: center; gap: 14px; }
+    .wx-ico { font-size: 2.4rem; line-height: 1; }
+    .wx-temp { font-size: 2.6rem; font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+    .wx-text b { display: block; font-weight: 600; }
+    .wx-text span { color: var(--muted); font-size: .95rem; }
+    .wx-meta { margin: 10px 0 0 !important; }
+    .wx-meta a { color: inherit; }
+    .brief ul { margin: 0; padding-left: 20px; font-size: 1rem; }
+    .brief li { margin: 6px 0; }
+    .brief li::marker { content: "⚓ "; }
+    .lane { position: relative; height: 110px; margin-top: 64px; overflow: hidden; }
+    .wl { position: absolute; left: 0; width: 200%; height: 60px; }
+    .wl.back { bottom: 24px; animation: slide 16s linear infinite; }
+    .wl.back path { fill: var(--sea); opacity: .22; }
+    .wl.front { bottom: -1px; animation: slide 10s linear infinite reverse; }
+    .wl.front path { fill: var(--bg); }
+    @keyframes slide { to { transform: translateX(-50%); } }
+
+    /* Footer */
+    footer { padding: 64px 0 0; overflow: hidden; }
+    footer .ctas { margin: 24px 0 28px; }
+    footer .note { margin: 0 0 6px; color: var(--muted); }
+    footer small { color: var(--muted); font-family: var(--mono); font-size: .75rem; display: block; }
+    .wordmark {
+      margin: 56px 0 0; text-align: center; white-space: nowrap; user-select: none;
+      font-size: clamp(4rem, 17vw, 15rem); font-weight: 800; letter-spacing: -.05em; line-height: .8;
+      color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--sea) 40%, transparent);
+      background: linear-gradient(90deg, var(--amber), var(--sea)) no-repeat 0 0 / var(--wm, 0%) 100%;
+      -webkit-background-clip: text; background-clip: text; transform: translateY(14%);
+    }
+
+    /* Command palette */
+    .cmdk {
+      width: min(560px, calc(100vw - 32px)); margin: 14vh auto 0; padding: 0; border: 1px solid var(--line);
+      border-radius: 20px; background: var(--surface); color: var(--ink); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .6);
+    }
+    .cmdk::backdrop { background: rgba(15, 28, 33, .45); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+    .cmdk[open] { animation: pop .2s var(--ease); }
+    @keyframes pop { from { transform: scale(.97); opacity: 0; } }
+    .cmdk input {
+      width: 100%; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink);
+      font: 600 1.1rem var(--display); padding: 18px 20px; outline: none;
+    }
+    .cmdk ul { list-style: none; margin: 0; padding: 8px; max-height: 50vh; overflow-y: auto; }
+    .cmdk li { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; cursor: pointer; }
+    .cmdk li .ic { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; background: var(--bg); border: 1px solid var(--line); font-size: .85rem; }
+    .cmdk li .hint { margin-left: auto; font: .72rem var(--mono); color: var(--muted); }
+    .cmdk li[aria-selected="true"] { background: var(--sea-soft); }
+    .cmdk .empty { display: block; padding: 16px 12px; color: var(--muted); }
+    .cmdk-foot { margin: 0; padding: 10px 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: .72rem; }
+
+    /* Easter egg */
+    .school { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 60; }
+    .school svg { position: absolute; left: -100px; animation: swim linear forwards; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .2)); }
+    @keyframes swim {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(calc(25vw + 50px), -12px); }
+      50% { transform: translate(calc(50vw + 100px), 8px); }
+      75% { transform: translate(calc(75vw + 150px), -8px); }
+      100% { transform: translate(calc(100vw + 200px), 0); }
+    }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; z-index: 70; transform: translate(-50%, calc(100% + 40px)); visibility: hidden;
+      background: var(--ink); color: var(--bg); padding: 12px 18px; border-radius: 999px; font-weight: 600;
+      box-shadow: var(--shadow); transition: transform .4s var(--ease), visibility 0s .4s; max-width: calc(100vw - 32px); text-align: center;
+    }
+    .toast.show { transform: translate(-50%, 0); visibility: visible; transition: transform .4s var(--ease); }
+
+    @media (max-width: 860px) {
+      section { padding: 72px 0; }
+      .wrap { padding: 0 16px; }
+      .top .links, .brand-text, .kbar .kbar-label { display: none; }
+      .hero { padding-top: 24px; }
+      .hero-grid, .fernly, .row2, .smaller-grid, .people-grid, .route-grid, .harbour-grid { grid-template-columns: 1fr; }
+      .stage { height: 400px; }
+      .portrait, .stage::before { width: 220px; height: 270px; margin: -135px 0 0 -110px; }
+      .stage::before { margin: -122px 0 0 -92px; }
+      .f1 { top: 8px; }
+      .f2 { top: 236px; right: 0; }
+      .f3 { bottom: 16px; left: 0; }
+      .card { padding: 24px; }
+      .phones { --pw: 120px; }
+      .fernly.in .phones { --s: 84px; }
+      .fernly:hover .phones { --s: 92px; }
+      .pile { position: static; order: -1; }
+      .map-wrap { position: static; }
+      .legs > li { padding-bottom: 44px; }
+      .harbour { padding-top: 104px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      html { scroll-behavior: auto; }
+      .scribble path { stroke-dashoffset: 0; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="hg" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#4F7488"/><stop offset=".45" stop-color="#C9D8E0"/><stop offset="1" stop-color="#F2F6F8"/>
+      </linearGradient>
+      <symbol id="herring" viewBox="0 0 64 24">
+        <path d="M60 12C50 3 30 2 16 9L4 2v20l12-7c14 7 34 6 44-3z" fill="url(#hg)" stroke="#3E5D6E" stroke-width="1"/>
+        <path d="M47 7q3 5 0 10" fill="none" stroke="#3E5D6E" stroke-width="1.2"/>
+        <circle cx="53" cy="10.5" r="1.8" fill="#17262B"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <nav class="top" id="nav" aria-label="Main">
+    <div class="wrap nav-in">
+      <a href="#top" class="brand"><span class="mark" aria-hidden="true">M</span><span class="brand-text">Michael Herland Valen</span><span class="sr">Michael Herland Valen, back to top</span></a>
+      <div class="links mono">
+        <a href="#built">Built</a>
+        <a href="#smaller">Work</a>
+        <a href="#people">People</a>
+        <a href="#route">Route</a>
+        <a href="#hi">Say hi</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-btn" type="button" aria-label="Switch between light and dark theme">◐</button>
+        <button class="kbar" id="kbar-btn" type="button" aria-haspopup="dialog"><span class="kbar-label">Jump to</span><kbd id="kbar-key">⌘K</kbd></button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="mono muted" style="margin:0 0 16px">Software engineer at Telenor · Proud Haugesunder · Based in Bærum</p>
+        <h1>Hi, I'm Michael. Think of me as a <span class="spud">potato.<svg class="scribble" viewBox="0 0 300 24" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M4 16C60 6 120 4 170 10s90 8 126-2"/></svg></span></h1>
+        <p class="intro">Not the fanciest thing on the plate, but I go with everything and I get the job done. Backend, databases, infrastructure, internal tools, docs: if it needs building, fixing or simplifying, I'm in.</p>
+        <div class="ctas">
+          <a class="btn" href="#built">See what I built</a>
+          <a class="btn ghost" href="https://github.com/OriginalMHV">GitHub</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/michaelhv">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="stage" id="stage">
+        <div class="portrait" id="portrait">
+          <img src="images/michael-portrait.webp" alt="Michael on the west coast at sunset, with the sea behind him" width="560" height="684">
+        </div>
+        <div class="float f1" data-depth="26"><span id="hero-wx-ico" aria-hidden="true">🌦</span><span><span id="hero-wx">Haugesund</span> <span class="mono">right now</span></span></div>
+        <a class="float f2" data-depth="40" href="#smaller"><span class="minus-badge" aria-hidden="true">−</span>Deleting legacy, on purpose</a>
+        <div class="float f3" data-depth="18">Kotlin by day <span class="mono">·</span> Rust by night</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="built">
+      <div class="wrap">
+        <h2 class="reveal">Things I built</h2>
+        <p class="lede reveal">If something bugs me long enough, I build a fix. Then I use it every day.</p>
+
+        <article class="card fernly reveal" id="fernly">
+          <div class="fernly-text">
+            <div class="top-row">
+              <h3>Fernly</h3>
+              <span class="pill fern">Coming soon · iPhone &amp; Android</span>
+            </div>
+            <p>A private medication and health journal. No account, no server, no analytics. Everything lives in one encrypted file on your phone, and you decide what leaves it.</p>
+            <p>Because health notes aren't ordinary app data, even when most apps treat them that way.</p>
+            <span class="tags">Flutter · Dart · local-first · encrypted</span>
+            <div class="nott-row">
+              <img src="images/nott.webp" alt="Nøtt, Fernly's squirrel mascot, smiling" width="129" height="150">
+              <p class="say">Hi, I'm Nøtt. I remind you. I never judge.</p>
+            </div>
+          </div>
+          <div class="phones">
+            <img class="ph ph-l" src="images/fernly-treatment.webp" alt="Fernly treatment screen with planned medication entries" width="302" height="630" loading="lazy">
+            <img class="ph ph-r" src="images/fernly-calendar.webp" alt="Fernly calendar screen showing a month of entries" width="302" height="630" loading="lazy">
+            <img class="ph ph-c" src="images/fernly-today.webp" alt="Fernly today screen with the plan for the day" width="302" height="630" loading="lazy">
+          </div>
+        </article>
+
+        <div class="row2">
+          <article class="card ward reveal">
+            <div class="top-row">
+              <h3>Ward</h3>
+              <span class="pill ocean">Open source · Rust CLI</span>
+            </div>
+            <p>GitHub repository settings as code. Describe what you want in a <span class="mono">ward.toml</span>, then plan, apply and verify it across many repositories at once. Because clicking through the same settings page a hundred times is no way to live.</p>
+            <div class="term" role="img" aria-label="Terminal: brew install OriginalMHV/tap/ward-cli, then ward init, ward plan, and ward apply">
+              <div class="term-bar"><i></i><i></i><i></i><span>~/repos</span></div>
+              <pre id="term"></pre>
+            </div>
+            <a class="more" href="https://github.com/OriginalMHV/Ward">Ward on GitHub →</a>
+          </article>
+          <div class="minis">
+            <div class="mini reveal" style="--d:.1s">
+              <h3><a href="https://github.com/OriginalMHV/Recall">Recall</a> <span class="pill ocean">Rust · TUI</span></h3>
+              <p>The conversation sidebar your terminal never had. Browse, search and resume past Copilot, Claude Code and Codex sessions.</p>
+            </div>
+            <div class="mini reveal" style="--d:.2s">
+              <h3>Pulse <span class="pill ocean">In the workshop</span></h3>
+              <p>htop for AI coding sessions. A live view of what your agents are up to.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="smaller" class="smaller">
+      <svg class="band-wave top" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h1200v28c-50 0-50 24-100 24S1050 28 1000 28 950 52 900 52 850 28 800 28 750 52 700 52 650 28 600 28 550 52 500 52 450 28 400 28 350 52 300 52 250 28 200 28 150 52 100 52 50 28 0 28z"/></svg>
+      <svg class="band-wave bottom" viewBox="0 0 1200 56" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h1200v28c-50 0-50 24-100 24S1050 28 1000 28 950 52 900 52 850 28 800 28 750 52 700 52 650 28 600 28 550 52 500 52 450 28 400 28 350 52 300 52 250 28 200 28 150 52 100 52 50 28 0 28z"/></svg>
+      <div class="wrap">
+        <h2 class="reveal">Things I made smaller</h2>
+        <p class="lede reveal">At Telenor, a lot of the work I'm proudest of no longer exists. On purpose.</p>
+
+        <div class="smaller-grid">
+          <div>
+            <div class="list">
+              <div class="item reveal">
+                <span class="icon" aria-hidden="true" style="--c:#EDBE7E">−1</span>
+                <div><h3>Fewer services</h3><p>Retired old applications and repositories. Fewer services means fewer pipelines, secrets, alerts and late-night surprises.</p></div>
+              </div>
+              <div class="item reveal">
+                <span class="icon" aria-hidden="true" style="--c:#8FD3DD">→</span>
+                <div><h3>Old systems, new homes</h3><p>Moved services from legacy infrastructure to Kubernetes, and helped lead the move from Atlassian to GitHub.</p></div>
+              </div>
+              <div class="item reveal">
+                <span class="icon" aria-hidden="true" style="--c:#9BE0B3">∅</span>
+                <div><h3>Real data out of test</h3><p>Co-built a synthetic test data platform, so real customer data could leave test environments without leaving teams stuck.</p></div>
+              </div>
+              <div class="item reveal">
+                <span class="icon" aria-hidden="true" style="--c:#FF9C8C">⇄</span>
+                <div><h3>Migrations that land</h3><p>Built the integration layer behind a large customer email platform migration, and have driven framework and runtime upgrades across many services since.</p></div>
+              </div>
+              <div class="item reveal">
+                <span class="icon" aria-hidden="true" style="--c:#C9B8F7">✓</span>
+                <div><h3>Safe by default</h3><p>Rolled out shared CI/CD, security scanning and repository standards, so the right choice is also the easy one.</p></div>
+              </div>
+            </div>
+            <div class="stack reveal">
+              <p><span class="mono">at work</span><span class="techs"><span class="tech" style="--c:#C9B8F7">Kotlin</span><span class="tech" style="--c:#9BE0B3">Spring Boot</span><span class="tech" style="--c:#8FD3DD">PostgreSQL</span><span class="tech" style="--c:#8FD3DD">Kubernetes</span><span class="tech" style="--c:#EDBE7E">GitHub Actions</span></span></p>
+              <p><span class="mono">after hours</span><span class="techs"><span class="tech" style="--c:#FF9C8C">Rust</span><span class="tech" style="--c:#8FD3DD">Flutter</span></span></p>
+            </div>
+          </div>
+
+          <div class="pile" id="pile">
+            <p class="sr">Illustration: a pile of typical legacy clutter that gets deleted as you scroll.</p>
+            <div class="pile-head mono" aria-hidden="true"><span>legacy/</span><span id="pile-count">10 things</span></div>
+            <div class="chips" aria-hidden="true">
+              <span class="chip" data-lines="812" style="--r:-3deg">legacy-soap-adapter</span>
+              <span class="chip" data-lines="433" style="--r:2deg">nano-service-v2-final</span>
+              <span class="chip" data-lines="1200" style="--r:-1deg">copy-pasted-pipeline.yml ×40</span>
+              <span class="chip" data-lines="96" style="--r:4deg">deploy-manually.md</span>
+              <span class="chip" data-lines="41" style="--r:-4deg">secrets.properties</span>
+              <span class="chip" data-lines="640" style="--r:1deg">jenkins-old-DO-NOT-TOUCH</span>
+              <span class="chip" data-lines="210" style="--r:-2deg">the-wiki-page-nobody-trusts</span>
+              <span class="chip" data-lines="154" style="--r:3deg">cron-job-nobody-owns</span>
+              <span class="chip" data-lines="523" style="--r:-3deg">util-common-shared-misc</span>
+              <span class="chip" data-lines="272" style="--r:2deg">TODO-remove-after-2019</span>
+              <div class="pile-done">Much better.<small>nothing left to babysit</small></div>
+            </div>
+            <div class="diff" aria-hidden="true">
+              <span>my favourite kind of PR:</span>
+              <span class="add">+12</span>
+              <span class="del" id="del">−0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="people">
+      <div class="wrap">
+        <div class="people-grid">
+          <div class="reveal">
+            <h2>The part I like most</h2>
+            <p class="lede">People. I genuinely like helping others grow.</p>
+          </div>
+          <div class="reveal" style="--d:.1s">
+            <p>Before Telenor I was a teaching assistant at the University of Agder, in programming, databases, networking and system development. It never really left me.</p>
+            <p>Today I onboard juniors, write the docs I wish existed when I started, help shape how we interview engineers, and now and then give talks on developer tooling and AI-assisted engineering.</p>
+          </div>
+        </div>
+        <blockquote class="pull reveal">Mostly, I try to be someone you can ask anything without feeling stupid.</blockquote>
+      </div>
+    </section>
+
+    <section id="route" class="route">
+      <div class="wrap">
+        <h2 class="reveal">The route, roughly</h2>
+        <p class="lede reveal">From the west coast, via Kristiansand, to Fornebu. Scroll to follow along.</p>
+        <div class="route-grid">
+          <div class="map-wrap reveal">
+            <svg class="map" viewBox="0 40 370.5 310" role="img" aria-label="Map of southern Norway with a route from Haugesund to Kristiansand to Fornebu">
+              <path class="se" d="M359.8 221.3 364 234 367.6 235.7 372.8 232.4 376.2 223.2 378.2 209.2 380.6 196 377.9 181.9 374.8 169.4 374.6 165.8 382.4 155.3 384.8 146.8 387.4 138.7 390.3 135.9 394.5 135.2 399.4 133.6 405.6 128.3 411.1 121 415.5 114.4 417 101.2 417 94.4 418.8 89.5 420.6 80 419 70.5 413.3 56 406.7 35.7 405.8 24.8 408.7 22.7 414.6 20.8 425.6 20.3 426.7 19.1 427.7 14.2 430.1 7.6 432.9 2.7 434.7 -4 435.4 -10.3 429.2 -19.6 421 -29.2 415.5 -32.3 405.6 -40.3 398.7 -47.1 402.7 -72.8 405.6 -91.7 406.2 -96.4 406.2 -103.5 396.7 -134.2 397.1 -141 398 -147.1 396.9 -157.7 396.3 -167 398 -169.8 401.8 -175 398.1 -183.2 397.8 -183.9 390.8 -204.2 401.6 -224.1 399.6 -234.6 406.2 -242.2 417.9 -259.4 424.5 -269.1 425.7 -270.7 431 -275 440.9 -280 451.9 -282.5 456.8 -282.5 475.6 -279 490.2 -276.4 492.4 -279 495.5 -284.6 499.6 -292.4 499.7 -301.1 498.5 -313.7 496.3 -321.4 485.9 -326.4 474.5 -333.2 488.4 -354.7 498.1 -369.6 510.2 -392 514 -401.4 516.7 -405.2 520.2 -439.6 522.6 -449.3 524.6 -454.3 524.6 -459.6 523.3 -468.2 519.8 -488 538.8 -490.5 545.1 -491.7 550.9 -494.1 562 -500.2 567.7 -505.6 564.6 -524 571.4 -530.2 588 -551.9 605.9 -572.6 614.3 -580.5 615.2 -584.4 615.9 -590.4 612.1 -600.2 608.1 -606.2 600.2 -617.5 603.7 -625.5 609.4 -627.1 617 -630.2 622.9 -637 623.6 -637.8 633.7 -664.6 653.2 -677.9 661.1 -685.4 673.3 -679.8 691 -671.5 699.1 -683.8 701.6 -688.4 704.4 -695.1 703.3 -706.8 702.7 -721.9 703.7 -727.8 710.8 -730.5 714.6 -731.2 734.3 -725 739.5 -725.2 748.8 -724.3 759.2 -721.5 781.1 -714.2 790.3 -711.3 795.4 -710.6 799.8 -714 809.1 -722.7 795.2 -729.2 804.3 -735.7 809.1 -742.3 813.1 -750.3 814.6 -759.9 814 -764.9 811.1 -768.4 802.7 -777.1 821.9 -778.3 828.4 -778.6 842.3 -772.9 842.9 -771.7 842.9 -768.7 843.4 -765.6 856.9 -757.8 860.8 -753.8 869 -747.4 871.2 -744.1 878.9 -740.1 884.4 -735.9 890.8 -732.4 898.2 -727.1 908.3 -722.7 916.7 -721.3 938.1 -714 941.7 -711.8 947.8 -706.6 954.2 -700.7 958.4 -688.7 965.3 -688 967.1 -683.8 973.2 -676.7 981.6 -670.5 981.2 -668.4 974.6 -662.5 973.9 -654.7 974.4 -644.6 976.6 -636.4 976.3 -634 974.6 -631.2 972.8 -626.7 972.1 -622.9 972.2 -621 972.8 -620 976.4 -620 982.7 -619.1 986.3 -617.4 988.5 -607.8 987.8 -606.1 982.5 -601.7 980.8 -598.4 980.6 -593.4 981.7 -588 983.4 -581.8 987.6 -575.3 993.3 -568.4 996.9 -562.8 998.6 -558.8 999.3 -556.1 996.7 -552.6 994.5 -545.7 994 -537.8 993.1 -532.6 988.1 -525.5 984.7 -523.1 983.8 -519.3 983.2 -513 984.3 -505.4 984.7 -500.3 985.8 -496.5 987.2 -494.1 995.1 -489.8 999.6 -481.1 1002.4 -474 1007.7 -455.6 994.4 -453.3 984.1 -457.8 979.2 -455.6 970.4 -455.4 960.4 -453.6 956.9 -450 954.3 -448.6 945 -453.6 936.2 -462.2 929.9 -455.7 925.6 -454.5 922 -460.2 918.7 -461.3 916.9 -459.2 915.4 -454.2 912.9 -450 912.3 -447.6 911.9 -437.2 911.2 -434.7 902.8 -436.1 903.2 -433.3 905 -431.9 905.9 -430.2 902.8 -428 894.2 -428.3 893.5 -425.9 895.9 -422.1 894 -418.8 892.2 -417.4 882.2 -415.3 876.3 -415.8 874.7 -413.7 874.1 -410.9 875.2 -408.2 877.8 -406.6 878.7 -404.9 878.5 -401.2 876.3 -400.5 870.3 -407.1 868.5 -406.8 869.7 -403.3 873.2 -399.5 875.2 -395.7 877 -391.2 876.7 -387.5 869.2 -376.2 862.4 -369.1 857.5 -362.7 854.6 -355.9 858 -352.4 861.7 -347.4 864.4 -337.9 867.5 -329.3 873.9 -321.4 872.7 -316.7 871.2 -313 860.6 -304.9 848.5 -292.7 835.6 -261.8 831.2 -257.7 819.9 -252.4 815.7 -247.2 807.3 -241.2 792.5 -236.1 785.7 -228.8 782.8 -221.4 779.3 -220.8 776 -223.8 771.6 -225.9 771.1 -221 771.3 -217.4 764.1 -222.8 760.7 -217.9 758.1 -209.7 747.9 -198.8 736.7 -200.7 735.6 -198.8 738.5 -197.4 738.9 -195.7 736.9 -194.8 733.8 -194.8 729.2 -192.7 726.1 -192.9 724.7 -187.7 722.3 -181.3 716.1 -178.7 712.8 -178.1 711.1 -174.7 720.8 -173.8 720.1 -170.9 719.9 -167.9 718.8 -164.6 707.9 -159.9 706.2 -156.3 704 -154 699.1 -154 699.3 -156.3 700 -158.5 692.9 -158.4 690.7 -163.7 689.2 -162.3 689.9 -158 692 -153.7 694 -147.1 692.3 -142.9 690.5 -141 691.8 -139.1 695.6 -137.7 697.3 -135.1 692.7 -132.8 686.8 -125.2 681 -125 677.3 -120.2 673.5 -120.2 670.4 -123.3 665.5 -125.9 663.8 -121.2 663.5 -117.7 666.4 -108.5 671.7 -101.4 676.8 -98.3 673.1 -96.2 670.4 -91.7 667.3 -77.3 665.5 -71.6 663.6 -61.7 664.7 -53.2 665.8 -49 668.2 -43.4 661.6 -44.1 654.5 -47.4 655.6 -40.7 651.2 -32.5 651.9 -25.5 652.9 -20.9 651.6 -13.2 653.6 -10.8 654.7 -6.3 652.9 -2.8 653.8 0.1 654 10.4 655.4 26.4 654.9 29.8 658.7 43.7 657.8 48.8 657.2 55 662.9 60.9 667.8 60.9 672.8 60.7 674.6 62.3 676.6 66.5 678.1 71.5 682.3 71.1 688.9 67 693.1 65.9 696 73.9 703.7 84.2 708 88.9 715.7 91.3 723.6 99.6 722.5 109.7 725.8 113.2 735.3 117 738.5 122.4 740.2 127 742.8 130.7 745.7 142.1 744.6 149.3 740.7 151.7 731.8 159.3 727.8 164.9 724.7 168.4 715.7 176 712.4 177.4 709.3 181.2 706.4 182.9 703.7 181.9 693.6 189 694.3 192.1 702 193.4 706 191.8 709.1 188.3 712.4 187.5 715.3 188.2 718.6 185.4 721.2 184.2 723.7 185.5 726.7 192.3 720.6 195.8 716.4 196 714.2 207.1 711.7 211.8 709.9 214 700.4 218.7 694 224.8 686.7 229.5 683.4 228.4 678.6 233.5 667.8 239.2 662.2 247 649.7 253.9 643.5 259.5 626.2 259.8 609.9 258.6 604.6 261.4 609.9 262.1 613.6 264.9 618.1 263.7 628.6 265.1 633.9 266.4 640.8 275.8 635.7 279.1 626.9 281.5 630.2 294.7 632.9 303.6 629.3 309 629.1 333.3 624.2 333.6 622 343.7 623.6 348.9 623.4 360.9 624.5 368.2 626.9 374.9 625.8 382.1 618 398.6 618.1 406.2 619.6 410.9 620.7 418.2 617 432.2 614.5 444.2 611.6 454.1 604.8 466.1 601.5 474.9 593.7 502.7 589.8 508.3 585.1 512.4 579.8 508.6 574.8 506.4 569 506.7 559.7 509.8 545.6 507.8 532.1 508.8 528.6 511.6 530.6 521.6 525.5 523 520.8 520.1 516.4 523.5 512.7 527.4 505.6 536.2 503.2 541.8 502.7 552 506.3 561.4 509.6 572.2 501.2 585.4 496.5 585.7 482.6 582.2 457.9 590.4 435.8 583.8 438.5 576.8 438.5 571.6 439.6 563.8 440.4 555.7 440.2 550.1 438.5 544.4 433.2 536.7 420.8 511.2 417.3 500.5 414.8 495.9 416.6 495.8 426.7 501.5 429 500.8 431.4 498.6 428.5 490.4 425.9 486.6 424.1 481 430.1 479.5 434.3 479.8 437.4 473.4 435.6 463.3 431 460 427.2 458.8 419.9 442.7 412.2 434.3 398.5 402.4 393.6 380.3 388.8 382.4 386.6 372.9 385 363.7 384.6 357.1 377.3 353.2 377.1 348.6 375.7 327.7 368 324.9 362.9 313.1 362 290.9 356.9 286.9 352.7 288.1 352.8 282.6 353.7 277.4 351.4 257.1 350.6 238.3 348.6 232.8 347.5 226.2 348.5 220.4 349.9 217.1 355 216.3 359.8 221.3Z"/>
+              <path class="no" d="M828.4 -778.6 821.9 -778.3 802.7 -777.1 811.1 -768.4 814 -764.9 814.6 -759.9 813.1 -750.3 809.1 -742.3 804.3 -735.7 795.2 -729.2 809.1 -722.7 799.8 -714 795.4 -710.6 790.3 -711.3 781.1 -714.2 759.2 -721.5 748.8 -724.3 739.5 -725.2 734.3 -725 714.6 -731.2 710.8 -730.5 703.7 -727.8 702.7 -721.9 703.3 -706.8 704.4 -695.1 701.6 -688.4 699.1 -683.8 691 -671.5 673.3 -679.8 661.1 -685.4 653.2 -677.9 633.7 -664.6 623.6 -637.8 622.9 -637 617 -630.2 609.4 -627.1 603.7 -625.5 600.2 -617.5 608.1 -606.2 612.1 -600.2 615.9 -590.4 615.2 -584.4 614.3 -580.5 605.9 -572.6 588 -551.9 571.4 -530.2 564.6 -524 567.7 -505.6 562 -500.2 550.9 -494.1 545.1 -491.7 538.8 -490.5 519.8 -488 523.3 -468.2 524.6 -459.6 524.6 -454.3 522.6 -449.3 520.2 -439.6 516.7 -405.2 514 -401.4 510.2 -392 498.1 -369.6 488.4 -354.7 474.5 -333.2 485.9 -326.4 496.3 -321.4 498.5 -313.7 499.7 -301.1 499.6 -292.4 495.5 -284.6 492.4 -279 490.2 -276.4 475.6 -279 456.8 -282.5 451.9 -282.5 440.9 -280 431 -275 425.7 -270.7 424.5 -269.1 417.9 -259.4 406.2 -242.2 399.6 -234.6 401.6 -224.1 390.8 -204.2 397.8 -183.9 398.1 -183.2 401.8 -175 398 -169.8 396.3 -167 396.9 -157.7 398 -147.1 397.1 -141 396.7 -134.2 406.2 -103.5 406.2 -96.4 405.6 -91.7 402.7 -72.8 398.7 -47.1 405.6 -40.3 415.5 -32.3 421 -29.2 429.2 -19.6 435.4 -10.3 434.7 -4 432.9 2.7 430.1 7.6 427.7 14.2 426.7 19.1 425.6 20.3 414.6 20.8 408.7 22.7 405.8 24.8 406.7 35.7 413.3 56 419 70.5 420.6 80 418.8 89.5 417 94.4 417 101.2 415.5 114.4 411.1 121 405.6 128.3 399.4 133.6 394.5 135.2 390.3 135.9 387.4 138.7 384.8 146.8 382.4 155.3 374.6 165.8 374.8 169.4 377.9 181.9 380.6 196 378.2 209.2 376.2 223.2 372.8 232.4 367.6 235.7 364 234 359.8 221.3 359.6 218.4 358.7 214.5 346.8 210.7 344.6 210.9 340 208.6 337.3 207.9 331.6 206.6 327.1 195.4 322 186.1 321.4 182.3 321.4 164.7 319.9 157.1 319.6 148.6 316.5 155.3 318.1 166.3 314.3 170.8 309.5 173 309.9 179.5 311.9 180.7 312.5 187.3 311.2 197 301.7 218.9 299.7 221.1 298.4 224.1 293.5 222.2 287.2 228.3 281.4 229.1 279.2 222.4 270.8 213.2 266.8 213.7 270.4 218.2 273.9 224.1 271.9 227.9 269.9 230.3 266.6 231.7 254.4 239.4 258.6 244.4 254.9 250.3 250.7 251.2 248.3 253.8 247.6 257.4 235 268 214.3 294.9 203.6 302.6 196.2 310.5 189.7 310.2 181.4 317 160.6 322.9 146.9 320.3 137.2 322.5 132.1 318 131.4 314.7 131.8 313 132.7 310.7 130.8 309.8 127 309.5 125.4 311.8 125.2 316.8 123.3 318.2 116.2 315.2 114.4 312.6 117 307.4 121.5 302.6 120.6 301.7 119.7 298.7 117.7 298.4 111.3 299.1 106 298.2 89 287.5 85.2 281.7 71.5 272.7 65.2 263 61.8 252.4 62.1 242.7 63.8 227.6 66.5 223.7 78.9 229.1 91.4 238 93.2 237.5 97.2 230.5 104.7 225 102.5 223.4 91.4 229.8 87.2 226.2 80.6 218.9 80.6 215.2 83.7 211.4 84.6 206.4 83.1 201.5 83.9 195.1 88.8 188.2 96.3 181.2 101.8 174.4 107.4 170.3 106.7 168.9 100.5 171.5 94.3 176 87.2 183.6 78.4 189.7 72 192 68.9 194.1 64.1 196 59.2 204.6 53.9 208.3 44.2 208.8 42.2 202.4 45 179.6 47.9 168.5 51 160.7 55.9 159.5 59.6 153.6 62.5 153.6 64.9 156.4 74.7 159 79.5 151.5 85.9 150.5 97.2 143.2 97 141.8 89.4 143.4 84.6 143.7 77.8 145.4 74.2 144.2 72.6 138.7 75.3 133.6 86.1 121.8 89.9 116.6 91.9 111.8 91.6 108.5 93.4 101.7 104 89.7 112.6 84.2 115.3 89 112.9 103.6 112.9 109.7 119.9 88.3 122.8 83.1 126.3 79.7 134.5 77.2 136.9 73.8 127.2 75 104 83.1 94.1 90.4 91.4 96 84.6 104.5 81.5 109.9 80 118 76.2 122.4 70.9 123.9 63.8 134.2 60.7 142.5 53.5 148.9 49 154 47.5 155.9 45 160.7 43 161.1 41.1 158.3 40.9 151.9 41.5 141.6 45 134.3 46.6 127 44.4 120.4 46.1 116.3 49 116.3 54.6 118.2 60.7 118 70.5 112.6 68.9 109.5 64.7 109.2 56.7 109.5 50.1 104.5 44.8 94.2 42.4 80.5 44 76.5 63.2 62.5 68.3 56.2 65.4 55.5 58.3 63.3 47.9 68 41.5 61.4 38 54.3 36 39.2 36.7 31.4 36 21.1 40.4 17.9 45.3 19.6 50.1 20.3 61.2 19.4 85.5 13.3 101.1 17 107.4 16.6 117.3 11.3 125.7 10.7 132.1 14.7 135.6 19.4 136.1 25.7 139.1 29.7 141.1 28.4 139.4 23.4 139.1 15.9 164.6 7.3 167.7 4 157.5 2.7 154.6 -5.1 160.1 -16.9 159.5 -18.4 153.9 -12.2 151.1 -3.3 152.2 3.6 151.1 6.9 145.8 8.5 134.1 9 126.6 6 119.7 4.3 117.3 2.1 118 -3 116.8 -4 113.8 0.5 111.3 9.5 105.8 11.6 90.5 8.3 68.3 10.2 58.5 14.7 52.1 14.2 40.9 6.2 36.6 -0 35.1 -12.7 35.6 -18.4 44.2 -20.7 48.6 -20.5 52.6 -23.5 49.2 -25.5 44 -29.4 40.6 -37 35.3 -39.4 31.8 -46 30.9 -55.9 32 -62.9 34.7 -65.1 41.5 -63.6 59.2 -64.6 75.8 -57.7 87.2 -53.7 110 -55.8 123.3 -62 121 -63.7 106.4 -60.1 93 -60.3 69.3 -67.2 59.6 -69.6 49.2 -68.6 43.7 -70.7 40.4 -77.6 42.8 -91 47.7 -93.9 50.4 -90.5 53.7 -90.1 57 -95.7 60.1 -99 62.7 -106.1 72 -112.9 76 -113.4 81.7 -116.5 85.3 -115.6 87.5 -112.5 90.5 -109.9 96.9 -110.3 115.7 -115.6 117.7 -117.4 121.3 -121.7 109.5 -119.8 99.6 -116.7 93.2 -115.8 92.3 -119.6 94.7 -123.3 98.3 -126.9 100.1 -133.4 104.2 -136.1 108.5 -136 117.7 -137.2 124.1 -138.7 135 -137.7 151.5 -135.3 162.1 -129.4 165.9 -129.9 170.1 -131.4 172.1 -133.5 163.7 -136 163.4 -139.6 164.3 -142.2 177.8 -147.1 192.6 -148.1 190 -152.1 157.7 -146.2 149.3 -150.2 142.7 -150.2 138.3 -147.9 125.9 -145.2 123.5 -147.1 125.9 -154 133.4 -165.3 133.9 -168.1 137.4 -170.9 156.8 -177.3 166.1 -184.9 170.3 -186 174.3 -185.4 180.7 -186.3 193 -184 198.4 -174.5 203.6 -171.5 219.5 -159.6 218.7 -163 205 -179.2 199.7 -183.2 195.9 -191.2 197.2 -198.6 201.5 -203.7 217.3 -206.3 220 -209.2 220.4 -214.3 218 -217.6 212.1 -217.4 207.4 -219.5 206.1 -224.8 207.9 -228.5 217.1 -235.1 222 -237.3 230.6 -239.6 245.4 -234.4 246.5 -231.6 242.5 -225 242.8 -221.4 246.5 -220.8 254.9 -232 265 -233.5 269.2 -236 273.9 -237.5 280.8 -227.4 283.8 -224.1 286 -222.9 288.2 -214.6 290.3 -214.1 293.5 -218.2 298.9 -220.5 306.6 -221.9 319.2 -219.8 325.1 -221.4 327.8 -221.2 325.2 -228.7 323.4 -230.7 326.2 -237.5 328.9 -240.1 337.7 -244.8 346.1 -246.9 351.6 -251.4 358.9 -255.6 357.8 -258.7 355.6 -262.5 350.8 -262.9 349 -264.9 355 -269.8 363.3 -275.4 361.8 -277.4 355.6 -279.9 350.8 -278.1 343.9 -273.8 335.7 -267 338.4 -265.1 342.4 -259.6 336.8 -252.1 306.4 -232.1 292.2 -226.2 285.4 -227.1 283.8 -232.7 280.8 -236.6 277.6 -245 271.9 -244.8 268.8 -242.9 267.3 -245.7 269.7 -254.5 274.5 -261.5 282.5 -266.9 286.1 -273.1 289.8 -283.3 301.3 -292.9 317.9 -316.9 331.6 -324.5 336.6 -332.8 344.6 -336.5 351.6 -342.9 356.9 -343.6 366.7 -349.5 372.2 -356.4 368.5 -356.8 360 -352.3 355 -350.5 355.4 -358 357.8 -365.6 364.9 -372.6 398.9 -392.9 402.4 -389.6 406.4 -383.5 416.6 -384.9 428.3 -396.4 437.3 -408.9 432.5 -406.8 427.2 -401.6 416.8 -394.5 412 -393.4 409.3 -394.3 407.8 -399.1 404.2 -400.5 400.9 -399.5 397.6 -403 397.1 -411.3 401.3 -423.6 404.7 -431.8 408.4 -438 422.6 -455.6 425.7 -465.3 432.3 -470.3 440.7 -469.1 443.3 -470.7 440.4 -476.9 431.2 -481.9 430.7 -485.1 461.2 -493.2 475.8 -493.1 480.2 -497 488 -499.7 494.1 -504.7 491 -506.9 476.2 -502.4 466.9 -500.2 462.6 -500.2 459.4 -498.6 447.7 -498.1 445.1 -518.1 446.9 -529 451.3 -528.6 452.2 -539.1 457.3 -545.1 464.5 -546.5 467.9 -549.1 473.1 -554.5 481.5 -553.3 490.2 -554.5 488 -556.9 477.3 -560.2 474.7 -565.8 478.4 -568.7 482.6 -571 486.2 -571.5 493.5 -582.3 497.9 -587 502.7 -586.1 509.6 -591 516.4 -589.2 522.8 -592.4 531.7 -594.4 564.2 -595.3 565.2 -599.6 558.2 -600.7 534.1 -601.9 521.8 -601.7 516.5 -600.5 514.7 -602.1 515.1 -604.9 519.5 -609 521.7 -613.5 530.6 -624.8 541.2 -632.5 549.3 -630.5 557.7 -623.3 563.9 -622.4 566.6 -620.1 571.2 -610.2 573.2 -609.9 572.3 -619.4 578.1 -627.1 576.7 -629.3 567.7 -626.6 560.9 -629.3 555.7 -635.2 554.2 -640.6 557.5 -645.8 560.6 -648.4 558.6 -651.6 545.1 -643.2 535.7 -641.3 531.9 -642.5 533.9 -650 532.8 -655.9 545.6 -670.6 549.8 -672.2 556.9 -671.2 563.3 -667 568.8 -667.7 574.7 -669.8 573.7 -673.8 561.1 -675.3 557.8 -678.6 559.1 -681.9 567.7 -685.2 576.5 -691.5 586.3 -693.2 594.2 -697.9 595.7 -696.9 597.1 -695 599.9 -677.8 607 -663.7 609.7 -663.2 607 -675.2 609.6 -678.6 612.7 -681.2 613.8 -684.2 610.1 -685.2 607 -689.4 602.6 -703.1 604.3 -706.8 613.6 -713.9 625.3 -715.6 637.7 -710.6 642.1 -710.4 649.4 -711.8 661.6 -716 668.9 -717.7 672.6 -717.7 673.5 -719.8 670 -721.2 668.9 -722.4 666.2 -723.2 654.9 -721 623.4 -721.7 620.5 -724.1 620 -728.3 623.3 -734.2 626.9 -737.7 638.8 -743.6 651.2 -744.4 664.4 -755 669.5 -762.8 672.2 -775.2 680.3 -785.1 700.5 -790.6 701.3 -793 699.1 -798.2 699.3 -807.4 704.9 -818.4 708.6 -822 710.2 -822.5 714.6 -818.9 719.9 -811.4 728.1 -807.3 738.9 -806.4 741.8 -808.5 733.4 -812.8 727 -818.4 726.5 -824.1 729.6 -827.1 734.2 -826.7 740.2 -827.4 745.7 -831.1 746.4 -833.8 746.6 -837.3 748.1 -841.1 756.1 -849.8 780.9 -855.5 782.8 -853.1 781.5 -836.3 778.6 -825.3 778.6 -817.3 783.5 -825.3 789.9 -847.2 794.8 -857.4 800.3 -863.3 804.3 -864.7 808.2 -867.7 813.3 -869.6 814.9 -867.2 816.6 -861.8 813.6 -842.7 814 -836.6 810.9 -828.6 799 -810.6 799.6 -808.3 802.3 -809.2 806.9 -812.1 821.5 -829.1 834.3 -827.1 834.5 -828.5 830.5 -833.5 825.3 -838.3 823.9 -844.2 824.6 -860 828.4 -866.5 839.4 -865.8 846.2 -866.6 849.3 -863.7 855.9 -863.9 860.4 -875.3 869.6 -876.4 877.6 -868.7 887.1 -863.7 895 -856.4 897.1 -858.5 892.9 -875.5 888.4 -881.6 878.5 -884.9 867.9 -892.5 865.2 -895.8 865.7 -898.4 874.9 -900.8 887.3 -898.1 898.1 -904.3 901.2 -902.6 909.6 -905.9 914.7 -901.5 917.8 -902.8 919.8 -908.8 933.1 -912.5 941.5 -909 946.1 -905.5 948.3 -898.8 951.4 -885.2 958 -877.9 962.2 -874.3 967.1 -873.4 969.3 -877.1 964.9 -881.4 963.7 -885.6 965.8 -895.8 968.4 -899.8 982.7 -914.9 994.7 -922.9 1001.8 -923.6 1014.3 -941.3 1017.9 -944.4 1021.2 -945.3 1020.3 -949.5 1013.5 -952.2 1013.2 -957.6 1022.3 -964.2 1033.3 -975.1 1038.8 -975.8 1042 -972.9 1052.8 -967.9 1059.2 -962.1 1064 -959.3 1067.1 -959.9 1069.6 -964.2 1072.7 -966.1 1079.5 -965.1 1083.5 -962.3 1086.8 -961.9 1089.5 -960.4 1090.3 -956.7 1084.4 -952.7 1074.4 -942.2 1064.5 -930.2 1061.2 -923.9 1058.1 -907.4 1050.3 -896.8 1049.7 -889.4 1052.8 -885.9 1061.4 -888.7 1071.8 -898.6 1074.6 -909 1100.7 -937.5 1113.1 -953.3 1127 -966.3 1134.9 -968.9 1138.7 -960.4 1135.6 -949.1 1129.7 -942 1134.1 -938.7 1133.2 -930 1131.9 -925.3 1131 -920.5 1131 -915.9 1135.2 -917.2 1151.5 -926.2 1155.7 -935.9 1159.5 -943.2 1161.4 -949.5 1167.7 -955.4 1179.8 -955.4 1180.4 -957.8 1165.7 -965.9 1164.1 -969.8 1169 -974.6 1182.4 -984.2 1189.3 -983.1 1193.5 -980.9 1210.1 -979.3 1222.7 -972.5 1222.4 -961.9 1219.5 -957.4 1216.7 -954.8 1200.5 -946.7 1197.7 -942.9 1202.8 -941.5 1213.8 -945.5 1216.7 -941.8 1213.2 -932.6 1212.5 -919.1 1211.2 -911.1 1211.2 -903.8 1212.7 -899.8 1217.1 -915.4 1218.5 -919.2 1225.1 -925.1 1227.5 -937 1233.7 -951 1240.8 -959.2 1245 -961.4 1258.7 -961.1 1264.8 -958 1269.9 -951.2 1273.7 -948.4 1286 -945.5 1290.4 -941.8 1291.1 -939.7 1294 -939.2 1302.2 -944.4 1307.7 -945.3 1316.5 -937.3 1314.7 -931.2 1315.2 -929.3 1325.8 -929.7 1334.6 -927.4 1351.4 -915.1 1353.2 -909.3 1352.3 -902.4 1328.2 -894.8 1317.8 -887.5 1300.6 -884.7 1242.5 -889.6 1243.8 -884.2 1284.1 -872.7 1286.5 -869.4 1285.2 -862.5 1285.1 -856.7 1286 -852.9 1288.9 -849.5 1293.8 -847.7 1303.9 -848.6 1308.8 -846.7 1312.3 -849.6 1313.6 -859.2 1316.5 -861.3 1322.1 -858.5 1324.5 -848.2 1326.2 -847.2 1328.9 -854.5 1334.6 -854 1340.6 -854.5 1348.5 -853.3 1351.2 -840.3 1351.2 -835.6 1349.9 -831.1 1348.1 -828.8 1344.4 -827.9 1335.7 -828.3 1323.6 -833.5 1315.9 -838.3 1313.6 -838.5 1312.5 -838 1314.3 -833.1 1313.9 -829.3 1312.6 -825.2 1311 -821.5 1308.8 -818.2 1304.1 -814.2 1295.8 -811.1 1273.4 -804.8 1271.5 -802.1 1264.2 -784.7 1262.2 -782.1 1259.7 -780 1251.8 -777.2 1248.1 -781.1 1245 -787 1245.8 -792.7 1254.9 -803.8 1263.3 -811.6 1265.7 -814.4 1270.6 -822.4 1260.8 -842.2 1243.6 -848.1 1223.8 -857.3 1216.5 -862.1 1205.2 -872.2 1197.3 -881.2 1190 -881.4 1182.2 -879.1 1169.8 -871 1162.6 -866.8 1158.6 -865.6 1157.7 -865.4 1148.7 -867.9 1138.9 -868.4 1131 -867.7 1128.1 -866.5 1117 -853.3 1109.3 -846.5 1105.1 -844.1 1102 -840.3 1099.4 -833.8 1093.7 -811.6 1089.5 -803.3 1088.6 -798.1 1089.5 -782.6 1088.6 -773.9 1083.5 -767 1079.9 -763.7 1074.9 -763 1068.7 -761.3 1063.2 -757.1 1059.4 -751.5 1055 -738.9 1047.7 -734.4 1040.6 -735.6 1035.5 -740.3 1024.7 -743.9 1016.6 -746.2 1007.7 -751 999.6 -754.8 992.5 -755.5 988.3 -750.9 985 -746.3 972.6 -742.7 965.5 -739.9 956.3 -739.2 952.7 -742.5 939.5 -744.6 923.8 -747 919.3 -747 917.8 -752.6 913.6 -760.6 902.4 -774.3 897.9 -779.1 889.1 -790.4 879.1 -802.1 877.8 -802.4 871 -802.8 861.2 -802.4 854.9 -799.8 850.9 -796.3 850.2 -793.7 854 -783.1 852.9 -780.4 850.9 -779.1 842 -782.1 831.2 -781.9 828.4 -778.6ZM33.4 16.5 28.9 17.9 25.4 16.8 26.7 7.3 28.5 5.7 31.3 5 34.2 10.2 33.4 16.5ZM39.8 94.2 40 106 35.5 105.2 33.3 100.7 32.7 97.7 33.1 90.9 32 83.8 33.3 80.3 35.1 79.8 38 86.1 39.8 94.2Z"/>
+              <path class="base" d="M49.1 183.6Q95 300 187.6 310.3Q300 280 320.8 135.4"/>
+              <path class="leg" id="leg1" pathLength="1" d="M49.1 183.6Q95 300 187.6 310.3"/>
+              <path class="leg" id="leg2" pathLength="1" d="M187.6 310.3Q300 280 320.8 135.4"/>
+              <g class="stop" transform="translate(49.1 183.6)"><circle class="halo" r="9"/><circle class="pin" r="5"/><text x="11" y="4">Haugesund</text></g>
+              <g class="stop" transform="translate(187.6 310.3)"><circle class="halo" r="9"/><circle class="pin" r="5"/><text x="11" y="15">Kristiansand</text></g>
+              <g class="stop" transform="translate(320.8 135.4)"><circle class="halo" r="9"/><circle class="pin" r="5"/><text x="-11" y="-10" text-anchor="end">Fornebu</text></g>
+            </svg>
+          </div>
+          <ol class="legs" id="legs">
+            <li>
+              <p class="where">Haugesund · until 2019</p>
+              <h3>Where it started</h3>
+              <ul>
+                <li><span class="yr">2014</span><span><b>Posten.</b> Customer service, address changes and sorting mail.</span></li>
+                <li><span class="yr">2015</span><span><b>Vardafjell upper secondary.</b> Media and communication.</span></li>
+                <li><span class="yr">2016</span><span><b>Haugesunds Avis.</b> Camera operator on live football broadcasts.</span></li>
+              </ul>
+            </li>
+            <li>
+              <p class="where">Kristiansand · 2019 to 2022</p>
+              <h3>Learning, then teaching</h3>
+              <ul>
+                <li><span class="yr">2019</span><span><b>University of Agder.</b> BSc in IT and information systems.</span></li>
+                <li><span class="yr">2021</span><span><b>Teaching assistant</b> in seven courses, from programming to databases and networking.</span></li>
+                <li><span class="yr">2021</span><span><b>Norkart and Kristiansand kommune.</b> User testing for a chatbot that talks with citizens.</span></li>
+                <li><span class="yr">2022</span><span><b>Bachelor project.</b> The Fished.no mobile app with Oxidane Venture, including CI/CD for iOS and Android.</span></li>
+              </ul>
+            </li>
+            <li>
+              <p class="where">Fornebu · 2022 to now</p>
+              <h3>Telenor</h3>
+              <ul>
+                <li><span class="yr">2022</span><span><b>Software developer.</b> Platform migrations, integration work and synthetic test data.</span></li>
+                <li><span class="yr">2024</span><span><b>Software engineer.</b> Platform simplification, security, developer experience and mentoring.</span></li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="harbour" id="haugesund" aria-labelledby="sea-title">
+      <svg class="waves-top" viewBox="0 0 1200 70" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 0h1200v28c-50 0-50 24-100 24S1050 28 1000 28 950 52 900 52 850 28 800 28 750 52 700 52 650 28 600 28 550 52 500 52 450 28 400 28 350 52 300 52 250 28 200 28 150 52 100 52 50 28 0 28z"/>
+      </svg>
+      <div class="wrap harbour-grid">
+        <div class="reveal">
+          <h2 id="sea-title">Off the keyboard</h2>
+          <p class="big">You'll find me on the sea in a kayak, holding a fishing rod, or cooking something far too ambitious for a Tuesday.</p>
+          <p class="big">Proud Haugesunder, living in Bærum. If you haven't heard of Haugesund yet, that's about to change.</p>
+          <button class="herring-btn" id="herring-btn" type="button">🐟 psst: type <kbd>sild</kbd> anywhere, or tap here</button>
+        </div>
+        <div class="side">
+          <div class="weather reveal" style="--d:.1s">
+            <p class="mono">haugesund right now</p>
+            <div class="wx-main">
+              <span class="wx-ico" id="wx-ico" aria-hidden="true">🌥</span>
+              <span class="wx-temp" id="wx-temp">…</span>
+              <div class="wx-text"><b id="wx-desc">Checking the sky</b><span id="wx-say">One second.</span></div>
+            </div>
+            <p class="wx-meta mono" id="wx-meta">Weather data by <a href="https://open-meteo.com/">Open-Meteo.com</a></p>
+          </div>
+          <div class="brief reveal" style="--d:.2s">
+            <p class="mono">haugesund, a quick briefing</p>
+            <ul>
+              <li>Harald Fairhair, the first king of Norway, is said to rest at Haraldshaugen. So Norway more or less started here.</li>
+              <li>Marilyn Monroe's father was most likely from Haugesund. There's a statue on the quay to prove we mean it.</li>
+              <li>Herring town. Home of Sildajazz and the Amanda film awards.</li>
+              <li>FK Haugesund. I used to film their matches for live broadcast.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="lane" aria-hidden="true">
+        <svg class="wl back" viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="M0 30q50-16 100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0V60H0z"/></svg>
+        <svg class="wl front" viewBox="0 0 2400 60" preserveAspectRatio="none"><path d="M0 30q50-16 100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0t100 0V60H0z"/></svg>
+      </div>
+    </section>
+  </main>
+
+  <footer id="hi">
+    <div class="wrap">
+      <h2 class="reveal">Say hi</h2>
+      <p class="lede reveal">LinkedIn is the best way to reach me. The code lives on GitHub.</p>
+      <div class="ctas reveal">
+        <a class="btn" href="https://www.linkedin.com/in/michaelhv">LinkedIn</a>
+        <a class="btn ghost" href="https://github.com/OriginalMHV">GitHub</a>
+      </div>
+      <p class="note mono">It's <span id="clock">--:--</span> in Bærum right now.</p>
+      <small>Hand-made HTML and CSS. No framework, no tracking. Press <kbd id="foot-key">⌘K</kbd> to get around.</small>
+    </div>
+    <div class="wordmark" id="wordmark" aria-hidden="true">michaelhv</div>
+  </footer>
+
+  <dialog class="cmdk" id="cmdk" aria-label="Command menu">
+    <input id="cmdk-input" type="text" placeholder="Where to?" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="cmdk-list" aria-label="Search commands">
+    <ul id="cmdk-list" role="listbox"></ul>
+    <p class="cmdk-foot mono">↑ ↓ to move · enter to open · esc to close</p>
+  </dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const $ = (id) => document.getElementById(id);
+    const clamp = (v) => Math.max(0, Math.min(1, v));
+    const root = document.documentElement;
+
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }), { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    let toastTimer;
+    function toast(text) {
+      const t = $("toast");
+      t.textContent = text;
+      t.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove("show"), 3200);
+    }
+
+    // Theme
+    function toggleTheme() {
+      const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      root.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("theme", root.dataset.theme); } catch {}
+    }
+    $("theme-btn").addEventListener("click", toggleTheme);
+
+    // Hero tilt and parallax
+    const stage = $("stage"), portrait = $("portrait"), floats = [...stage.querySelectorAll(".float")];
+    if (finePointer && !reduce) {
+      addEventListener("pointermove", (e) => {
+        const r = stage.getBoundingClientRect();
+        if (r.bottom < 0) return;
+        const nx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width * 0.8)));
+        const ny = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height * 0.8)));
+        portrait.style.setProperty("--ry", `${(nx * 9).toFixed(2)}deg`);
+        portrait.style.setProperty("--rx", `${(-ny * 9).toFixed(2)}deg`);
+        floats.forEach((f) => {
+          const d = +f.dataset.depth;
+          f.style.setProperty("--fx", `${(nx * d).toFixed(1)}px`);
+          f.style.setProperty("--fy", `${(ny * d).toFixed(1)}px`);
+        });
+      }, { passive: true });
+    }
+
+    // Ward terminal
+    const term = $("term");
+    const script = [
+      ["brew install OriginalMHV/tap/ward-cli", ""],
+      ["ward init", "# describe the repos you want"],
+      ["ward plan", "# read-only: see what would change"],
+      ["ward apply", "# apply in order, then verify"],
+    ];
+    function span(cls, text) { const s = document.createElement("span"); s.className = cls; s.textContent = text; return s; }
+    function finishTerm() { term.append(span("ps", "$ "), span("cursor", "")); }
+    function typeTerm() {
+      if (reduce) {
+        script.forEach(([cmd, c]) => term.append(span("ps", "$ "), cmd + (c ? "  " : ""), span("c", c), "\n"));
+        return finishTerm();
+      }
+      let li = 0;
+      const next = () => {
+        if (li === script.length) return finishTerm();
+        const [cmd, c] = script[li++];
+        term.append(span("ps", "$ "));
+        const out = document.createTextNode("");
+        const cur = span("cursor", "");
+        term.append(out, cur);
+        let i = 0;
+        const tick = setInterval(() => {
+          out.data = cmd.slice(0, ++i);
+          if (i >= cmd.length) {
+            clearInterval(tick); cur.remove();
+            term.append(c ? "  " : "", span("c", c), "\n");
+            setTimeout(next, 650);
+          }
+        }, 38);
+      };
+      next();
+    }
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) { obs.disconnect(); setTimeout(typeTerm, reduce ? 0 : 300); }
+    }, { threshold: 0.5 }).observe(term);
+
+    // Scroll-linked pieces
+    const nav = $("nav"), pile = $("pile"), smaller = $("smaller"), del = $("del"), count = $("pile-count");
+    const chips = [...pile.querySelectorAll(".chip")];
+    const legs = $("legs"), legItems = [...legs.children], leg1 = $("leg1"), leg2 = $("leg2");
+    const stops = [...document.querySelectorAll(".stop")];
+    const wordmark = $("wordmark");
+    const sections = ["built", "smaller", "people", "route", "hi"].map((id) => [id, $(id), nav.querySelector(`a[href="#${id}"]`)]);
+    let ticking = false;
+    function update() {
+      ticking = false;
+      const vh = innerHeight;
+      nav.classList.toggle("scrolled", scrollY > 8);
+
+      let current = null;
+      sections.forEach(([id, el]) => { if (el.getBoundingClientRect().top < vh * 0.4) current = id; });
+      sections.forEach(([id, , a]) => a.classList.toggle("active", id === current));
+
+      const s = smaller.getBoundingClientRect();
+      const gone = Math.round(clamp((vh * 0.7 - s.top) / (vh * 0.9)) * chips.length);
+      let removed = 0;
+      chips.forEach((c, i) => {
+        c.classList.toggle("gone", i < gone);
+        if (i < gone) removed += +c.dataset.lines;
+      });
+      del.textContent = "−" + removed.toLocaleString("en");
+      const left = chips.length - gone;
+      count.textContent = left + (left === 1 ? " thing" : " things");
+      pile.classList.toggle("clean", left === 0);
+
+      const l = legs.getBoundingClientRect();
+      const rp = clamp((vh * 0.55 - l.top) / Math.max(1, l.height - vh * 0.35));
+      leg1.style.strokeDashoffset = 1 - clamp(rp * 2);
+      leg2.style.strokeDashoffset = 1 - clamp(rp * 2 - 1);
+      const reached = rp >= 0.97 ? 2 : rp >= 0.5 ? 1 : l.top < vh * 0.8 ? 0 : -1;
+      stops.forEach((st, i) => st.classList.toggle("on", i <= reached));
+      legItems.forEach((it, i) => it.classList.toggle("on", i <= reached));
+
+      const w = wordmark.getBoundingClientRect();
+      const rest = Math.max(0, root.scrollHeight - vh - scrollY);
+      const seen = vh - w.top;
+      wordmark.style.setProperty("--wm", `${(seen <= 0 ? 0 : clamp(seen / (seen + rest)) * 100).toFixed(1)}%`);
+    }
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    update();
+
+    // Haugesund weather
+    function sky(code, day) {
+      if (code <= 1) return [day ? "☀️" : "🌙", code ? "Mostly clear" : "Clear", day ? "Rare. Screenshot it." : "Clear night. Suspicious."];
+      if (code <= 3) return [code === 2 ? "⛅" : "☁️", code === 2 ? "Partly cloudy" : "Overcast", "Grey. Classic west coast."];
+      if (code <= 48) return ["🌫", "Fog", "Foggy and moody. Lovely."];
+      if (code <= 57) return ["🌦", "Drizzle", "Normal."];
+      if (code <= 67) return ["🌧", "Rain", "Normal."];
+      if (code <= 77) return ["🌨", "Snow", "Snow in Haugesund? Wild."];
+      if (code <= 82) return ["🌦", "Rain showers", "Normal."];
+      if (code <= 86) return ["🌨", "Snow showers", "Snow in Haugesund? Wild."];
+      return ["⛈", "Thunderstorm", "Even the sky is loud today."];
+    }
+    const osloTime = () => new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Oslo", hour: "2-digit", minute: "2-digit" }).format(new Date());
+    (async () => {
+      const credit = ' · data by <a href="https://open-meteo.com/">Open-Meteo.com</a>';
+      try {
+        const ctl = new AbortController();
+        setTimeout(() => ctl.abort(), 6000);
+        const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=59.4138&longitude=5.268&current=temperature_2m,weather_code,wind_speed_10m,is_day&wind_speed_unit=ms&timezone=Europe%2FOslo", { signal: ctl.signal });
+        const { current: c } = await res.json();
+        const [ico, desc, comment] = sky(c.weather_code, c.is_day === 1);
+        const wind = Math.round(c.wind_speed_10m), temp = Math.round(c.temperature_2m) + "°";
+        $("wx-ico").textContent = ico;
+        $("wx-temp").textContent = temp;
+        $("wx-desc").textContent = desc;
+        $("wx-say").textContent = comment + (wind >= 10 ? " The kayak stays home." : "");
+        $("wx-meta").innerHTML = `Wind ${wind} m/s · ${osloTime()} in Haugesund${credit}`;
+        $("hero-wx-ico").textContent = ico;
+        $("hero-wx").textContent = `${temp} and ${desc.toLowerCase()} in Haugesund`;
+      } catch {
+        $("wx-ico").textContent = "🌧";
+        $("wx-temp").textContent = "?°";
+        $("wx-desc").textContent = "The weather service did not answer";
+        $("wx-say").textContent = "Assume rain. Usually right.";
+        $("wx-meta").innerHTML = `${osloTime()} in Haugesund${credit}`;
+        $("hero-wx").textContent = "Probably raining in Haugesund";
+      }
+    })();
+    const tickClock = () => { $("clock").textContent = osloTime(); };
+    tickClock();
+    setInterval(tickClock, 30000);
+
+    // Herring
+    const NS = "http://www.w3.org/2000/svg";
+    function herring() {
+      toast("🐟 Sildabyen says hi. That means herring town.");
+      if (reduce) return;
+      const school = document.createElement("div");
+      school.className = "school";
+      school.setAttribute("aria-hidden", "true");
+      for (let k = 0; k < 18; k++) {
+        const f = document.createElementNS(NS, "svg");
+        f.setAttribute("viewBox", "0 0 64 24");
+        const u = document.createElementNS(NS, "use");
+        u.setAttribute("href", "#herring");
+        f.append(u);
+        f.style.cssText = `top:${(6 + Math.random() * 84).toFixed(1)}vh;width:${Math.round(34 + Math.random() * 44)}px;animation-duration:${(4.5 + Math.random() * 4).toFixed(2)}s;animation-delay:${(Math.random() * 1.6).toFixed(2)}s`;
+        school.append(f);
+      }
+      document.body.append(school);
+      setTimeout(() => school.remove(), 11000);
+    }
+    $("herring-btn").addEventListener("click", herring);
+
+    // Command palette
+    const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+    if (!isMac) { $("kbar-key").textContent = "Ctrl K"; $("foot-key").textContent = "Ctrl K"; }
+    const dlg = $("cmdk"), input = $("cmdk-input"), list = $("cmdk-list");
+    const go = (sel) => () => document.querySelector(sel).scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+    const link = (url) => () => window.open(url, "_blank", "noopener");
+    const commands = [
+      { ic: "→", label: "Things I built", hint: "Fernly, Ward, Recall", run: go("#built") },
+      { ic: "→", label: "Things I made smaller", hint: "work at Telenor", run: go("#smaller") },
+      { ic: "→", label: "People", hint: "mentoring, teaching", run: go("#people") },
+      { ic: "→", label: "The route", hint: "Haugesund to Fornebu", run: go("#route") },
+      { ic: "→", label: "Haugesund", hint: "weather and a briefing", run: go("#haugesund") },
+      { ic: "→", label: "Say hi", hint: "contact", run: go("#hi") },
+      { ic: "↗", label: "Open LinkedIn", hint: "linkedin.com/in/michaelhv", run: link("https://www.linkedin.com/in/michaelhv") },
+      { ic: "↗", label: "Open GitHub", hint: "github.com/OriginalMHV", run: link("https://github.com/OriginalMHV") },
+      { ic: "↗", label: "Open Ward on GitHub", hint: "Rust CLI", run: link("https://github.com/OriginalMHV/Ward") },
+      { ic: "◐", label: "Switch theme", hint: "light or dark", run: toggleTheme },
+      { ic: "🐟", label: "Release the herring", hint: "a Haugesund thing", run: herring },
+    ];
+    let shown = commands, sel = 0;
+    function render() {
+      const q = input.value.trim().toLowerCase();
+      shown = commands.filter((c) => (c.label + " " + c.hint).toLowerCase().includes(q));
+      sel = Math.min(sel, Math.max(0, shown.length - 1));
+      list.replaceChildren(...(shown.length ? shown.map((c, i) => {
+        const li = document.createElement("li");
+        li.id = "cmd-" + i;
+        li.setAttribute("role", "option");
+        li.setAttribute("aria-selected", i === sel);
+        li.append(span("ic", c.ic), c.label, span("hint", c.hint));
+        li.addEventListener("click", () => runCmd(i));
+        li.addEventListener("pointermove", () => { if (sel !== i) { sel = i; render(); } });
+        return li;
+      }) : [span("empty", "Nothing here. Try “github” or “theme”.")]));
+      input.setAttribute("aria-activedescendant", shown.length ? "cmd-" + sel : "");
+      list.querySelector('[aria-selected="true"]')?.scrollIntoView({ block: "nearest" });
+    }
+    function openCmd() { input.value = ""; sel = 0; render(); dlg.showModal(); input.focus(); }
+    function runCmd(i) { const c = shown[i]; if (!c) return; dlg.close(); c.run(); }
+    $("kbar-btn").addEventListener("click", openCmd);
+    input.addEventListener("input", () => { sel = 0; render(); });
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") { e.preventDefault(); sel = (sel + 1) % Math.max(1, shown.length); render(); }
+      else if (e.key === "ArrowUp") { e.preventDefault(); sel = (sel - 1 + shown.length) % Math.max(1, shown.length); render(); }
+      else if (e.key === "Enter") { e.preventDefault(); runCmd(sel); }
+    });
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
+
+    let typed = "";
+    addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        dlg.open ? dlg.close() : openCmd();
+        return;
+      }
+      if (dlg.open || e.key.length !== 1 || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === "/") { e.preventDefault(); openCmd(); return; }
+      typed = (typed + e.key.toLowerCase()).slice(-12);
+      if (typed.endsWith("sild") || typed.endsWith("haugesund")) { typed = ""; herring(); }
+    });
+
+    console.log(
+      "%cHi! You opened DevTools.%c\nThat makes you my kind of person. Press ⌘K / Ctrl K on the page, or type 'sild'.\nlinkedin.com/in/michaelhv · github.com/OriginalMHV",
+      "font: 700 16px system-ui; color: #22697A", "font: 12px monospace; color: #A87A42"
+    );
+  </script>
+</body>
+</html>
