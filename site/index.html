@@ -282,6 +282,13 @@
     .diff .add { color: var(--fern); }
     .diff .del { color: var(--red); font-weight: 600; min-width: 6ch; }
 
+    /* Easier */
+    .rails { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .rail { border-top: 3px solid var(--c); padding-top: 20px; }
+    .rail .mono { color: var(--c); margin: 0 0 10px; font-weight: 600; }
+    .rail h3 { font-size: 1.25rem; margin-bottom: 10px; }
+    .rail p:last-child { margin: 0; color: var(--muted); font-size: 1rem; }
+
     /* People */
     .people-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 56px; align-items: start; }
     .people-grid p { margin: 0 0 18px; }
@@ -406,7 +413,7 @@
       .wrap { padding: 0 16px; }
       .top .links, .brand-text, .kbar .kbar-label { display: none; }
       .hero { padding-top: 24px; }
-      .hero-grid, .fernly, .row2, .smaller-grid, .people-grid, .route-grid, .harbour-grid { grid-template-columns: 1fr; }
+      .hero-grid, .fernly, .row2, .smaller-grid, .rails, .people-grid, .route-grid, .harbour-grid { grid-template-columns: 1fr; }
       .stage { height: 400px; }
       .portrait, .stage::before { width: 220px; height: 270px; margin: -135px 0 0 -110px; }
       .stage::before { margin: -122px 0 0 -92px; }
@@ -446,7 +453,7 @@
 
   <nav class="top" id="nav" aria-label="Main">
     <div class="wrap nav-in">
-      <a href="#top" class="brand"><span class="mark" aria-hidden="true">M</span><span class="brand-text">Michael Herland Valen</span><span class="sr">Michael Herland Valen, back to top</span></a>
+      <a href="#top" class="brand" aria-label="Michael Herland Valen, back to top"><span class="mark" aria-hidden="true">M</span><span class="brand-text">Michael Herland Valen</span></a>
       <div class="links mono">
         <a href="#built">Built</a>
         <a href="#smaller">Work</a>
@@ -559,11 +566,11 @@
               </div>
               <div class="item reveal">
                 <span class="icon" aria-hidden="true" style="--c:#9BE0B3">∅</span>
-                <div><h3>Real data out of test</h3><p>Co-built a synthetic test data platform, so real customer data could leave test environments without leaving teams stuck.</p></div>
+                <div><h3>Real data out of test</h3><p>Co-built a synthetic test data platform, so real customer data could leave test environments without leaving teams stuck. Privacy is a design requirement, not a checkbox.</p></div>
               </div>
               <div class="item reveal">
                 <span class="icon" aria-hidden="true" style="--c:#FF9C8C">⇄</span>
-                <div><h3>Migrations that land</h3><p>Built the integration layer behind a large customer email platform migration, and have driven framework and runtime upgrades across many services since.</p></div>
+                <div><h3>Migrations that land</h3><p>Built the integration layer for moving Online.no email users to a new platform, and have driven framework and runtime upgrades across many services since, most recently to Spring Boot 4 and Java 25.</p></div>
               </div>
               <div class="item reveal">
                 <span class="icon" aria-hidden="true" style="--c:#C9B8F7">✓</span>
@@ -571,7 +578,7 @@
               </div>
             </div>
             <div class="stack reveal">
-              <p><span class="mono">at work</span><span class="techs"><span class="tech" style="--c:#C9B8F7">Kotlin</span><span class="tech" style="--c:#9BE0B3">Spring Boot</span><span class="tech" style="--c:#8FD3DD">PostgreSQL</span><span class="tech" style="--c:#8FD3DD">Kubernetes</span><span class="tech" style="--c:#EDBE7E">GitHub Actions</span></span></p>
+              <p><span class="mono">at work</span><span class="techs"><span class="tech" style="--c:#C9B8F7">Kotlin</span><span class="tech" style="--c:#EDBE7E">Java</span><span class="tech" style="--c:#9BE0B3">Spring Boot</span><span class="tech" style="--c:#8FD3DD">PostgreSQL</span><span class="tech" style="--c:#FF9C8C">Kafka</span><span class="tech" style="--c:#8FD3DD">Kubernetes</span><span class="tech" style="--c:#C9B8F7">Helm</span><span class="tech" style="--c:#9BE0B3">ArgoCD</span><span class="tech" style="--c:#8FD3DD">Azure</span><span class="tech" style="--c:#EDBE7E">GitHub Actions</span></span></p>
               <p><span class="mono">after hours</span><span class="techs"><span class="tech" style="--c:#FF9C8C">Rust</span><span class="tech" style="--c:#8FD3DD">Flutter</span></span></p>
             </div>
           </div>
@@ -602,6 +609,30 @@
       </div>
     </section>
 
+    <section id="easier" class="easier">
+      <div class="wrap">
+        <h2 class="reveal">Things I made easier</h2>
+        <p class="lede reveal">I like building the rails other people run on.</p>
+        <div class="rails">
+          <article class="rail reveal" style="--c: var(--sea)">
+            <p class="mono">onboarding</p>
+            <h3>An onboarding site for developers</h3>
+            <p>I created the developer onboarding site at Telenor: the docs I wish existed when I started. I still maintain it, and newer developers now add to it too.</p>
+          </article>
+          <article class="rail reveal" style="--c: var(--amber-dark); --d: .1s">
+            <p class="mono">visibility</p>
+            <h3>A dashboard other teams adopted</h3>
+            <p>I built a repository health dashboard to track my own upgrade work: security alerts, versions and open pull requests. Other teams saw it and started using it.</p>
+          </article>
+          <article class="rail reveal" style="--c: var(--fern); --d: .2s">
+            <p class="mono">ai</p>
+            <h3>AI as a team tool</h3>
+            <p>I build shared AI skills that know our standards, so the whole team benefits, not just me. I also co-created <a href="https://github.com/TelenorNorway/telenor-ai-interview">an interview</a> where candidates use AI to modernize a legacy service.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="people">
       <div class="wrap">
         <div class="people-grid">
@@ -611,7 +642,7 @@
           </div>
           <div class="reveal" style="--d:.1s">
             <p>Before Telenor I was a teaching assistant at the University of Agder, in programming, databases, networking and system development. It never really left me.</p>
-            <p>Today I onboard juniors, write the docs I wish existed when I started, help shape how we interview engineers, and now and then give talks on developer tooling and AI-assisted engineering.</p>
+            <p>Today I mentor juniors inside and outside my team, help decide how we interview engineers, and now and then give talks on developer tooling and AI-assisted engineering.</p>
           </div>
         </div>
         <blockquote class="pull reveal">Mostly, I try to be someone you can ask anything without feeling stupid.</blockquote>
@@ -710,7 +741,7 @@
   <footer id="hi">
     <div class="wrap">
       <h2 class="reveal">Say hi</h2>
-      <p class="lede reveal">LinkedIn is the best way to reach me. The code lives on GitHub.</p>
+      <p class="lede reveal">Always up for a good conversation about backend, platforms or developer experience. LinkedIn is the best way to reach me, and the code lives on GitHub.</p>
       <div class="ctas reveal">
         <a class="btn" href="https://www.linkedin.com/in/michaelhv">LinkedIn</a>
         <a class="btn ghost" href="https://github.com/OriginalMHV">GitHub</a>
@@ -935,6 +966,7 @@
     const commands = [
       { ic: "→", label: "Things I built", hint: "Fernly, Ward, Recall", run: go("#built") },
       { ic: "→", label: "Things I made smaller", hint: "work at Telenor", run: go("#smaller") },
+      { ic: "→", label: "Things I made easier", hint: "onboarding, dashboards, AI", run: go("#easier") },
       { ic: "→", label: "People", hint: "mentoring, teaching", run: go("#people") },
       { ic: "→", label: "The route", hint: "Haugesund to Fornebu", run: go("#route") },
       { ic: "→", label: "Haugesund", hint: "weather and a briefing", run: go("#haugesund") },
