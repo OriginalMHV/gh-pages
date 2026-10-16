@@ -163,10 +163,10 @@
 
   /* ---------- herring ---------- */
 
-  var school = $("#school");
-  var schoolInner = school.querySelector(".d02-school-in");
+  var shoal = $("#shoal");
   var status = $("#sild-status");
   var statusTimer = 0;
+  var SVG = "http://www.w3.org/2000/svg";
 
   function say(message, visible) {
     window.clearTimeout(statusTimer);
@@ -177,33 +177,49 @@
     }, 50);
     statusTimer = window.setTimeout(function () {
       status.textContent = "";
-    }, 9000);
+    }, 7000);
   }
 
-  function inView(el) {
-    var box = el.getBoundingClientRect();
-    return box.bottom > 0 && box.top < window.innerHeight;
+  function between(min, max) {
+    return min + Math.random() * (max - min);
   }
 
-  var herringButton = $("#sild-btn");
-
+  // Fixed to the viewport, so the school crosses whatever part of the page you are reading, head first (right to left).
   function releaseHerring() {
     if (reduceMotion.matches) {
       say("A school of herring just swam past. Motion is off, so you'll have to take my word for it.", true);
-      if (!inView(herringButton)) herringButton.scrollIntoView({ block: "center", behavior: "auto" });
       return;
     }
-    school.classList.remove("d02-swim-a");
-    void school.offsetWidth;
-    school.classList.add("d02-swim-a");
+    if (shoal.childElementCount > 40) return;
+    var count = window.innerWidth < 600 ? 12 : 20;
+    var pace = Math.min(5.4, Math.max(2.8, window.innerWidth / 260));
+    var middle = between(30, 62);
+    var longest = 0;
+    var fish = [];
+    for (var i = 0; i < count; i++) {
+      var one = document.createElementNS(SVG, "svg");
+      one.setAttribute("class", "d02-f");
+      one.setAttribute("viewBox", "0 0 44 16");
+      var use = document.createElementNS(SVG, "use");
+      use.setAttribute("href", "#d02-fish");
+      one.appendChild(use);
+      var duration = pace * between(0.85, 1.2);
+      var delay = i === 0 ? 0 : between(0, 1.1);
+      one.style.setProperty("--y", (middle + between(-20, 20)).toFixed(1) + "vh");
+      one.style.setProperty("--w", Math.round(between(32, 56)) + "px");
+      one.style.setProperty("--t", duration.toFixed(2) + "s");
+      one.style.setProperty("--d", delay.toFixed(2) + "s");
+      longest = Math.max(longest, duration + delay);
+      shoal.appendChild(one);
+      fish.push(one);
+    }
     say("A school of herring swims across the page.", false);
-    if (!inView(school)) school.scrollIntoView({ block: "center", behavior: "smooth" });
+    window.setTimeout(function () {
+      for (var k = 0; k < fish.length; k++) fish[k].remove();
+    }, (longest + 0.3) * 1000);
   }
 
-  schoolInner.addEventListener("animationend", function () {
-    school.classList.remove("d02-swim-a");
-  });
-  herringButton.addEventListener("click", releaseHerring);
+  $("#sild-btn").addEventListener("click", releaseHerring);
 
   /* ---------- jump menu ---------- */
 
@@ -263,7 +279,7 @@
   }
 
   document.addEventListener("keydown", function (event) {
-    if (event.defaultPrevented || event.isComposing || !event.key) return;
+    if (event.defaultPrevented || event.isComposing || event.repeat || !event.key) return;
     var canJump = typeof jump.showModal === "function";
     var key = event.key.toLowerCase();
 
@@ -287,7 +303,7 @@
       window.clearTimeout(typedTimer);
       typedTimer = window.setTimeout(function () {
         typed = "";
-      }, 1500);
+      }, 2000);
       if (typed === "sild") {
         typed = "";
         releaseHerring();
