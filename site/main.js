@@ -14,7 +14,7 @@
   /* ---------- theme ---------- */
 
   var themeButton = $("#theme-toggle");
-  var themeColors = { light: "#D6E8F4", dark: "#07141D" };
+  var themeColors = { light: "#FCFCFB", dark: "#151515" };
 
   function currentTheme() {
     var set = root.dataset.theme;
